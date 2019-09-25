@@ -1,0 +1,4 @@
+.Rproj.user/*
+*cache*
+index/_book/*
+index/_bookdown_files/*
