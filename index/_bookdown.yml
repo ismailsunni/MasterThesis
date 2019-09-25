@@ -8,9 +8,6 @@ rmd_files: [
   "04-result-and-analysis.Rmd",
   "05-discussion.Rmd",
   "06-conclusion.Rmd",
-#  "02-chap2.Rmd",
-#  "03-chap3.Rmd",
-#  "04-conclusion.Rmd",
   "98-appendix.Rmd",
   "99-references.Rmd"
   ]
