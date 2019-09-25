@@ -1,3 +1,3 @@
 # Introduction {#introduction}
 
-R is a programming language for statistical computation and graphics [@FAQ]`. R has more than 14.000 packages, which are available through the Comprehensive R Archive Network (CRAN) [@CRANContributedPackages]`. There are over 2050 geospatial (spatial and spatial-temporal) packages to read, write, or analyze spatial data [@bivandCRANTaskView2019]`
+R is a programming language for statistical computation and graphics [@FAQ]. R has more than 14.000 packages, which are available through the Comprehensive R Archive Network (CRAN) [@CRANContributedPackages]`. There are over 2050 geospatial (spatial and spatial-temporal) packages to read, write, or analyze spatial data [@bivandCRANTaskView2019].
