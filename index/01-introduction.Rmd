@@ -1,5 +1,7 @@
 # Introduction {#introduction}
 
+## Motivation
+
 R is a programming language for statistical computation and graphics [@FAQR]. R has more than 14.000 packages, which are available through the Comprehensive R Archive Network (CRAN) [@CRANContributedPackages]. There are over 2050 geospatial (spatial and spatial-temporal) packages to read, write, or analyze spatial data[@bivandCRANTaskView2019]. On CRAN, packages are published and tested to maintain their functionalities and ensure compatibility. 
 
 Currently, those packages are tested for different compilers and on different operating system, but only for the main implementation of R by R Development Core Team and ony for Debian, [@FAQR]. In CRAN, there are also result for R packages installation and checking for Debian GNU/Linux, Fedora, OS X, Solaris, and Windows [@rdevelopmentcoreteamCRANPackageCheck2019].
@@ -8,4 +10,16 @@ There are other alternative implemention exist like pqR [@nealPqRPrettyQuick2019
 
 Unfortunately, it is not clear how will geospatial R packages behave on these implementations since these packages often relies on system libraries which installed at the system level. For example, sf package depends on GDAL, GEOS, and PROJ [@pebesmaSfSimpleFeatures2019]. This means it’s not sure whether they can work on different platforms and R implementations or not. The behavior refers to whether an R package can be installed, run, and its performance on these alternative R implementations. Beside the alternative R implementations, the platform where the R runs is also taken into consideration since the libraries are installed at the system level.
 
+A container is computer software that is used to package and run an application and all of its dependencies [@dockerWhatContainer2019]. Since it is isolated from the external system, users can set up anything that is needed and run even complex software environments on another computer easily. This ability enables the developer to create different computational environments to run a specific software. In testing, it is very useful since you can have a well-defined configuration, especially if you need specific versions dependencies [@manuelweissHowDockerMakes2016].`
 
+## Aim and Objective {#aim-objective}
+
+The main goal of this research is to understand what the performance of geospatial R packages in non-base R implementations and on platforms currently not supported by CRAN is. The behavior that we want to understand is installation and testing aspects of the R packages (i.e. whether an R package can be installed or not and whether the packages’ tests pass or not in the uncommon R implementations).
+One step to achieve this goal is creating docker image for all possible combination of R implementations and platform. The next step is testing the compatibilities of packages from spatial and spatial-temporal views on the containers from the docker image created previously. Lastly, based on the result of previous testing, the performance of successful combination is benchmarked in term of speed for typicial geospatial workflow.
+
+## Research Question
+
+1. What are the system dependency for the R packages for each different platform? Is the information provided by the sysreqs database complete for geospatial packages?
+2. Which combinations of platform (operating system distribution), R implementation, system libraries, and geospatial R packages that can be successfully installed?
+3. What are the causes for unsuccessful installations?
+4. For the compilable combination, how is the comparison between them in terms of performance?
