@@ -12,6 +12,7 @@ The main implementation of R programing language is developed by the R Core Team
 ### Microsoft R Open
 
 Microsoft Open R (MRO) is created by Microsoft Corporation which has additional capabilities for better performance, reproducibility, and platform support. The latest release (MRO 3.5.3) is based on GNU-R 3.5.3. It has the compatibility with all all packages that compatible with GNU-R 3.5.3[@microsoftMicrosoftOpenEnhanced2019]. There are some docker image available for example by [@nustNuestMrodocker2019] based on Ubuntu 18.04 and [@lisicJlisicRdockercentos2017] based on CentOS 7. 
+MRO has a bette
 
 ### Renjin
 
