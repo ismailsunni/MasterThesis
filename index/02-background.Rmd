@@ -11,8 +11,7 @@ The main implementation of R programing language is developed by the R Core Team
 
 ### Microsoft R Open
 
-Microsoft Open R (MRO) is created by Microsoft Corporation which has additional capabilities for better performance, reproducibility, and platform support. The latest release (MRO 3.5.3) is based on GNU-R 3.5.3. It has the compatibility with all all packages that compatible with GNU-R 3.5.3[@microsoftMicrosoftOpenEnhanced2019]. There are some docker image available for example by [@nustNuestMrodocker2019] based on Ubuntu 18.04 and [@lisicJlisicRdockercentos2017] based on CentOS 7. 
-MRO has a bette
+Microsoft Open R (MRO) is created by Microsoft Corporation which has additional capabilities for better performance, reproducibility, and platform support. The latest release (MRO 3.5.3) is based on GNU-R 3.5.3. It has the compatibility with all all packages that compatible with GNU-R 3.5.3[@microsoftMicrosoftOpenEnhanced2019]. There are some docker image available for example by [@nustNuestMrodocker2019] based on Ubuntu 18.04 and [@lisicJlisicRdockercentos2017] based on CentOS 7.
 
 ### Renjin
 
@@ -35,12 +34,8 @@ TERR is enterprise-grade analytic engine creted by TIBCO that has full compatibi
 
 From 10 major Linux distribution based on [@distrowatchDistroWatchComPut2019], Debian, Fedora, and Arch Linux are choosen for this research. Debian and Fedora are chosen because they are being used on CRAN and have different package managers. Arch Linux is chosen because it is a linux distribution in different spectrum compared to Debian and Fedora [@distrowatchDistroWatchComPut2019]. Ubuntu is not chosen because it is built on Debian and is widely used in the GIS & R community (cf. UbuntuGIS).  Fedora represents the Fedora/RedHat/CentOS distributions [@danielmiesslerDifferenceFedoraRedhat2019].
 
-### Debian
-
-### Fedora
-
-### Arch Linux
-
 ## Container Technology
 
+
 ## Benchmarking in R
+
