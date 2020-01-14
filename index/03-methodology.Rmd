@@ -22,16 +22,12 @@ The benchmark process is run on XPS 9360 laptop with core i7 8th gen processor, 
 
 ## Analysis
 
-Based on the first two part result, analysis is done. There are three kind of analysis:
+Based on the first two part result, analysis is done. There is one analysis for each result.
 
-### R Installation Failure Analysis
+### Failure Analysis
 
-An analysis why an R implementation can not be installed on a platform will be done. If possible, a fix for the problem will be done through the research.
-
-### R Package Installation Failure Analysis
-
-An analysis why an R packages can not be installed on a combination of R implementation platform will be done. If possible, a fix for the problem will be done through the research.
+In the process of docker image creation including R installation, system dependencies installation, and R package installation it is expected that there will be a problem or an error in the process. Theses problems is tried to be solved as part of the methodology. Some problems can fixed and some others can not be done in the time of this research. All those problem will be grouped by the charactheristic and then it can be seen what's the most common one.
 
 ### Benchmark Analysis
 
-The result of the benchmark will be analysed.
+The result of the benchmark will be analysed. Depending on the result, it will be checked what is the reason if there is a slower or faster combination in the bencmark.

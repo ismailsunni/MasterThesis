@@ -1,6 +1,6 @@
 # Result and Analysis {#result-analysis}
 
-Lorem ipsum
+In this part, the result of the research and the analysis of the result is shown.
 
 ## Docker Images
 
