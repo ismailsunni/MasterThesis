@@ -1,3 +1,5 @@
 # Discussion {#discussion}
 
-Lorem ipsum
+## Common Problems for R Implementations and Platform
+
+## Benchmark Result
