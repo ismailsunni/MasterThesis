@@ -1,6 +1,6 @@
 # Background {#background}
 
-In this chapter, 
+In this chapter, various R implementations, Linux distiribution, container technology, and benchmarking in R is explained.
 
 ## R Implementations
 
@@ -36,10 +36,13 @@ From 10 major Linux distribution based on [@distrowatchDistroWatchComPut2019], D
 
 ## Container Technology
 
+Write only Docker? Or with OS level virtualization also?
+
 Container is a way to put code and all its dependencies in a WHAT TO WRITE HERE?
 
 ## Benchmarking in R
 
+TODO: Write about benchmarking in R
 
 
 
