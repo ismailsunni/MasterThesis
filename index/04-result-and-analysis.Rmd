@@ -63,7 +63,7 @@ knitr::include_graphics('./figure/plots/baseline.png')
 
 ### Geospatial Workflow Benchmark
 
-For running geospatial workflow, the code from SDSR book is extracted using an R script to avoid overhead time in knitting the book. The result of this benchmark can be seen in box plot \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all docker images. We can see also that GNU R has better performance compared to MRO regarldess the operating system. For better view of the speed comparison, another box plot is created to show the ratio of the duration compared to the mean of elapsed time for GNU R on Debian. The result can be seen at figure \@ref(fig:ratio-sdsr-benchmark).
+For running geospatial workflow, the code from SDSR book is extracted using an R script to avoid overhead time in knitting the book. The result of this benchmark can be seen in box plot \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all docker images. We can see also that GNU R has better performance compared to MRO regarldess the operating system. For better view of the speed comparison, another box plot is created to show the ratio of the duration compared to the mean of elapsed time for GNU R on Debian. The result can be seen at figure \@ref(fig:ratio-sdsr-benchmark). MRO spent around 1.2x times compared to GNU R.
 
 ```{r sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark', out.width = "400px"}
 knitr::include_graphics('./figure/plots/sdsr.png')
