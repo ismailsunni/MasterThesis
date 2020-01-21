@@ -1,0 +1,7 @@
+# Future Works {#future-work}
+
+This research can be continued or extended into these future works:
+
+1. Adding MRO on Arch Linux by downgrading GDAL and Proj or wait until MRO release a new version based on GNU R 3.6.x
+2. Adding feature to run benchmark from existing docker container so that there are more flexibility to setup the benchmark process
+3. Do benchmark with the same version of system dependencies since in this research the version of system dependencies (e.g. GDAL, PROJ) are not the same.
