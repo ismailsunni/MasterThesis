@@ -6,6 +6,7 @@ division: 'Institute for Geoinformatics'
 advisor: 'Prof. Edzer Pebesma (ifgi)'
 # If you have more two advisors, un-silence line 7
 altadvisor: 'Daniel Nüst (ifgi)'
+secondaltadvisor: 'Roberto Henriques (UNL)'
 department: 'Geosciences'
 degree: 'Master in Geospatial Technologies'
 title: 'Testing Geospatial R Packages on Implementations of the R Language and Platforms'

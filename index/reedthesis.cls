@@ -212,6 +212,11 @@
 \newif\if@altadvisor
 \@altadvisorfalse
 
+\def\secondaltadvisor#1{\gdef \@secondaltadvisor{#1} \@secondaltadvisortrue}
+\global\let\@secondaltadvisor\@empty
+\newif\if@secondaltadvisor
+\@secondaltadvisorfalse
+
 \renewcommand\l@chapter[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
@@ -338,9 +343,12 @@
   \centerline{(\@department)} %major
   \vskip 1cm		%space to sign
   \centerline{\makebox[\wd0][c]{\hrulefill}
-	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\hrulefill} \fi}
+	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\hrulefill} \fi
+	\if@secondaltadvisor \makebox[.5in]{} \makebox[\wd0][c]{\hrulefill} \fi}
   \centerline{\makebox[\wd0][c]{\@advisor}
-	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\@altadvisor} \fi}
+	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\@altadvisor} \fi
+	\if@secondaltadvisor \makebox[.5in]{} \makebox[\wd0][c]{\@secondaltadvisor} \fi
+	}
   \par\vfil\null}
   \cleardoublepage
   }
