@@ -40,7 +40,7 @@ There is a docker image for FastR 3.4.0 on Debian[@nustNuestFastrdocker2019]. Bu
 
 Another attempt is using the the official GraalVM docker image [@OracleGraalvmceDocker] based on Oracle Linux 7. It's possible to install FastR 3.6.1 but not geospatial packages like `sf` because the GDAL is too old on Oracle Linux 7. It is solved by building GDAL from source [@262588213843476InstallGdalRedhat]. Similar problem (old package) also happens with `Pandoc` that is used for running the book knitting in SDSR. This is not mandatory though for geospatial workflow. Unfortunately, there is a code in SDSR book that doesn't run correctly like in GNU R or MRO related to `sf` [@SfInstalledNot].
 
-From these results, it's concluded that it's not possible to install geospatial packages on FastR thus in the case of Arch Linux, it's not pursued.
+From these results, it's concluded that it's not possible to install geospatial packages on FastR thus in the case of Arch Linux, it's not explored.
 
 
 ### pqR
@@ -49,7 +49,7 @@ There is already pqR docker image for Debian[@nustNuestPqrdocker2019]. Unfortuna
 
 ### TIBCO Enterprise Runtime for R (TERR)
 
-Although TERR is not free and open, TIBCO provides TERR for free with Developer Evaluation license [@TIBCOEnterpriseRuntime]. This license has a limitation which prevent pubslishing the docker image of TERR[@TIBCOEnterpriseRuntime]. With this limitation, this research only provides Dockerfile to build the docker image that needs the installer that can be obtained from the TIBCO website. TERR is successfully installed for Debian and Ubuntu. Unfortunately, there is a problem when R geospatial packages are tried to be installed. If there is already a package installed, it is not possible to re-install the package. For example, 'package `vctrs` is already installed from another R packages installation, if we want to install `RSQLite` which depends on `vctrs` it will turns an error. From this problem, it is not possible to install geospatial packages which have a same R package dependency.
+Although TERR is not free and open, TIBCO provides TERR for free with Developer Evaluation license [@TIBCOEnterpriseRuntime]. This license has a limitation which prevent pubslishing the docker image of TERR[@TIBCOEnterpriseRuntime]. With this limitation, this research only provides Dockerfile to build the docker image that needs the installer that can be obtained from the TIBCO website. TERR is successfully installed for Debian and Ubuntu. Unfortunately, there is a problem when R geospatial packages are tried to be installed. If there is already a package installed, it is not possible to re-install the package. For example, package `vctrs` is already installed from another R packages installation, if we want to install `RSQLite` which depends on `vctrs` it will turns an error. From this problem, it is not possible to install geospatial packages which have a same R package dependency.
 
 Since it is not possible to install R geospatial packages with Debian and Ubuntu, we do not continue the exploration for Fedora and Arch Linux.
 
@@ -69,6 +69,28 @@ knitr::include_graphics('./figure/plots/baseline.png')
 ### Geospatial Workflow Benchmark
 
 For running geospatial workflow, the code from SDSR book is extracted using an R script to avoid overhead time in knitting the book. The result of this benchmark can be seen in box plot \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all docker images. We can see also that GNU R has better performance compared to MRO regarldess the operating system. For better view of the speed comparison, another box plot is created to show the ratio of the duration compared to the mean of elapsed time for GNU R on Debian. The result can be seen at figure \@ref(fig:ratio-sdsr-benchmark). MRO spent around 1.2x times compared to GNU R.
+
+```{r load_data, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+library('microbenchmark')
+library('knitr')
+library('kableExtra')
+baseline_benchmark = readRDS(file = "./data/simple_benchmark_result.rds")  # 1 + 1
+benchmark_result_per_chapter = readRDS(file = "./data/benchmark_result.rds")  # per chapter
+sdsr_code_benchmark = readRDS(file = "./data/sdsr_code_benchmark_result.rds") # all code in one run
+nano_time_factor = 10^9
+options(digits=3)
+```
+
+```{r summary_table_baseline, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+summary_table_baseline <- baseline_benchmark %>% 
+      group_by(expr) %>% 
+      summarise(min_time = min(time) / nano_time_factor,
+                mean_time = mean(time) / nano_time_factor,
+                median_time = median(time) / nano_time_factor,
+                max_time = max(time) / nano_time_factor
+                )
+```
+
 
 ```{r sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark', out.width = "400px"}
 knitr::include_graphics('./figure/plots/sdsr.png')
