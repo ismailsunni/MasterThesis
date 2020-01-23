@@ -57,22 +57,8 @@ Since it is not possible to install R geospatial packages with Debian and Ubuntu
 
 In this section, the result of the benchmark is shown and explained for baseline benchmark and geospatial workflow benchmark
 
-### Baseline Benchmark
-
-`altRnative` package that is used for benchmarking is using docker images for each R implementation and platform. In this case there is already elapsed time for running the container and destroy it. Baseline benchmark is used to check the time spent for this process. To do it, a very simple R script (`1 + 1`) is run 10 times for each docker image. The result as shown in box plot \@ref(fig:baseline-benchmark) show that there is not so much different in this duration.
-
-
-```{r baseline-benchmark, echo=FALSE, fig.align='center', fig.cap='Baseline Benchmark', out.width = "400px"}
-knitr::include_graphics('./figure/plots/baseline.png')
-```
-
-### Geospatial Workflow Benchmark
-
-For running geospatial workflow, the code from SDSR book is extracted using an R script to avoid overhead time in knitting the book. The result of this benchmark can be seen in box plot \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all docker images. We can see also that GNU R has better performance compared to MRO regarldess the operating system. For better view of the speed comparison, another box plot is created to show the ratio of the duration compared to the mean of elapsed time for GNU R on Debian. The result can be seen at figure \@ref(fig:ratio-sdsr-benchmark). MRO spent around 1.2x times compared to GNU R.
-
 ```{r load_data, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library('microbenchmark')
-library('knitr')
 library('kableExtra')
 baseline_benchmark = readRDS(file = "./data/simple_benchmark_result.rds")  # 1 + 1
 benchmark_result_per_chapter = readRDS(file = "./data/benchmark_result.rds")  # per chapter
@@ -81,16 +67,39 @@ nano_time_factor = 10^9
 options(digits=3)
 ```
 
-```{r summary_table_baseline, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
-summary_table_baseline <- baseline_benchmark %>% 
+### Baseline Benchmark
+
+`altRnative` package that is used for benchmarking is using docker images for each R implementation and platform. In this case there is already elapsed time for running the container and destroy it. Baseline benchmark is used to check the time spent for this process. To do it, a very simple R script (`1 + 1`) is run 10 times for each docker image. The summary can be seen at table \@ref(tab:summaryTableBaseline). It's clear that there is not so much different between docker images for this baseline benchmark. The distribution of the baseline benchmark is shown in box plot figure \@ref(fig:baseline-benchmark).
+
+```{r create_summary_table_baseline, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+summaryTableBaseline <- baseline_benchmark %>% 
       group_by(expr) %>% 
-      summarise(min_time = min(time) / nano_time_factor,
-                mean_time = mean(time) / nano_time_factor,
-                median_time = median(time) / nano_time_factor,
-                max_time = max(time) / nano_time_factor
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor
                 )
 ```
 
+```{r summaryTableBaseline, results='asis', echo=FALSE}
+summaryTableBaseline %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Baseline Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
+```
+
+```{r baseline-benchmark, echo=FALSE, fig.align='center', fig.cap='Baseline Benchmark', out.width = "400px"}
+knitr::include_graphics('./figure/plots/baseline.png')
+```
+
+### Geospatial Workflow Benchmark
+
+For running geospatial workflow, the code from SDSR book is extracted using an R script to avoid overhead time in knitting the book. The result of this benchmark can be seen in box plot \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all docker images. We can see also that GNU R has better performance compared to MRO regarldess the operating system. For better view of the speed comparison, another box plot is created to show the ratio of the duration compared to the mean of elapsed time for GNU R on Debian. The result can be seen at figure \@ref(fig:ratio-sdsr-benchmark). MRO spent around 1.2x times compared to GNU R.
 
 ```{r sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark', out.width = "400px"}
 knitr::include_graphics('./figure/plots/sdsr.png')
