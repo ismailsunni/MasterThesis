@@ -71,6 +71,10 @@ options(digits=3)
 
 `altRnative` package that is used for benchmarking is using docker images for each R implementation and platform. In this case there is already elapsed time for running the container and destroy it. Baseline benchmark is used to check the time spent for this process. To do it, a very simple R script (`1 + 1`) is run 10 times for each docker image. The summary can be seen at table \@ref(tab:summaryTableBaseline). It's clear that there is not so much different between docker images for this baseline benchmark. The distribution of the baseline benchmark is shown in box plot figure \@ref(fig:baseline-benchmark).
 
+```{r baseline-benchmark, echo=FALSE, fig.align='center', fig.cap='Baseline Benchmark', out.width = "400px"}
+knitr::include_graphics('./figure/plots/baseline.png')
+```
+
 ```{r create_summary_table_baseline, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 summaryTableBaseline <- baseline_benchmark %>% 
       group_by(expr) %>% 
@@ -93,9 +97,6 @@ summaryTableBaseline %>%
     )
 ```
 
-```{r baseline-benchmark, echo=FALSE, fig.align='center', fig.cap='Baseline Benchmark', out.width = "400px"}
-knitr::include_graphics('./figure/plots/baseline.png')
-```
 
 ### Geospatial Workflow Benchmark
 
@@ -105,7 +106,29 @@ For running geospatial workflow, the code from SDSR book is extracted using an R
 knitr::include_graphics('./figure/plots/sdsr.png')
 ```
 
+```{r create_summary_table_sdsr, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+summaryTableSDSR <- sdsr_code_benchmark %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor
+                )
+```
+
+```{r summaryTableSDSR, results='asis', echo=FALSE}
+summaryTableSDSR %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "SDSR Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
+```
+
+
 ```{r ratio-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='Ratio SDSR Benchmark', out.width = "400px"}
 knitr::include_graphics('./figure/plots/ratio_sdsr.png')
 ```
-
