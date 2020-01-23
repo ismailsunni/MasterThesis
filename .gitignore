@@ -1,7 +1,7 @@
 .Rproj.user/*
 *cache*
-index/_book/*
-index/_bookdown_files/*
+_book/*
+_bookdown_files/*
 .Rproj.user
-index/thesis.log
+thesis.log
 .Rhistory
