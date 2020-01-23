@@ -36,6 +36,11 @@ Renjin docker image for Debian is available[@nustNuestRenjindockerDockerfiles201
 
 ### FastR
 
+There is a docker image for FastR 3.4.0 on Debian[@nustNuestFastrdocker2019]. But there is a problem on installing `sf` package (one of the core geospatial packages). The problem is related to `proj` not found although it's already installed [@CanNotInstall]. The next attempt is using the latest FastR release 3.6.0, by extending an example from [@CouldnBuildFastr]. Unfortunately, the problem still exists. To check whether this problem is FastR specific or not, GNU R is installed for both docker images and it's possible to install `sf` on it. This means, the problem is specific to FastR.
+
+Another attempt is using the the official GraalVM docker image [@OracleGraalvmceDocker] based on Oracle Linux 7. It's possible to install FastR 3.6.1 but not geospatial packages like `sf` because the GDAL is too old on Oracle Linux 7. It is solved by building GDAL from source [@262588213843476InstallGdalRedhat]. Similar problem (old package) also happens with `Pandoc` that is used for running the book knitting in SDSR. This is not mandatory though for geospatial workflow. Unfortunately, there is a code in SDSR book that doesn't run correctly like in GNU R or MRO related to `sf` [@SfInstalledNot].
+
+From these results, it's concluded that it's not possible to install geospatial packages on FastR thus in the case of Arch Linux, it's not pursued.
 
 
 ### pqR
