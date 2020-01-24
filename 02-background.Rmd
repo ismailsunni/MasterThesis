@@ -36,13 +36,8 @@ From 10 major Linux distribution based on [@distrowatchDistroWatchComPut2019], D
 
 ## Container Technology
 
-Write only Docker? Or with OS level virtualization also?
-
 Container is a way to put code and all its dependencies in a WHAT TO WRITE HERE?
 
 ## Benchmarking in R
 
-TODO: Write about benchmarking in R
-
-
-
+There are already several benchmarking R package for R lie using `microbenchmark`, `rbenchmark`, `tictoc`, and `bench` [@gossmannWaysMeasureRunning2017]. Those package measure the duration of running an R script or expression. Unfortunately, those packages do not support running benchmark for different R implementation and platform easily.
