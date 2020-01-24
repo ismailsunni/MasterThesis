@@ -73,5 +73,8 @@ Similar as problem with unsupported implementation, this kind of error is also h
 
 ## Benchmark Result
 
+The benchmark result from the experiment is quite clear as previously mentioned in chapter \@ref(benchmark). The platform difference almost does not give any difference and GNU R performs a little bit better (~1.1x faster) compared to MRO regardless the platform for geospatial workflow. This not a surprise since MRO's strength is about matrix or vector operation [@BenefitsMultithreadedPerformance] while geospatial workflow in the SDSR books doesn't need a lot of matrix or vector operation.
 
 ## Limitation and Possible Improvement
+
+

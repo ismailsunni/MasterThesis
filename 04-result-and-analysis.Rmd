@@ -53,7 +53,7 @@ Although TERR is not free and open, TIBCO provides TERR for free with Developer 
 
 Since it is not possible to install R geospatial packages with Debian and Ubuntu, we do not continue the exploration for Fedora and Arch Linux.
 
-## Benchmark
+## Benchmark {#benchmark}
 
 In this section, the result of the benchmark is shown and explained for baseline benchmark and geospatial workflow benchmark
 
