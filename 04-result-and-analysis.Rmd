@@ -131,7 +131,8 @@ summaryTableSDSR %>%
     caption = "SDSR Benchmark",
     booktabs = T) %>%
   kable_styling(
-    latex_options = "striped"
+    latex_options = "striped",
+    full_width = T
     )
 ```
 
@@ -143,7 +144,8 @@ normalizeSummaryTableSDSR %>%
     caption = "Normalized SDSR Benchmark",
     booktabs = T) %>%
   kable_styling(
-    latex_options = "striped"
+    latex_options = "striped",
+    full_width = T
     )
 ```
 
@@ -156,5 +158,32 @@ normalize_benchmark_boxplot(
     sdsr_code_benchmark, 
     baseline_image = 'gnu-r on debian', 
     main = 'Duration Ratio for All SDSR Code'
+    )
+```
+
+It also can be check which chpater of the book that takes the most time to run in table \@ref(tab:longestChapter). Chapter `04-Raster-Cube.R` takes the most of the time compared to other chapters with 26.01 seconds. From here we can examine the benchmark result of chapter `04-Raster-Cube.R`.
+
+```{r find_longest_chapter, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+library('plyr')
+df_chapters <- ldply (benchmark_result_per_chapter, data.frame)
+colnames(df_chapters) <- c('chapter', 'dockerimage', 'time')
+# Important to unload the package
+detach(package:plyr, unload=TRUE)
+timePerChapter <- df_chapters %>% 
+  select(chapter, time) %>% 
+  group_by(chapter) %>% 
+  summarise(meantime = mean(time) / nano_time_factor)
+```
+
+```{r longestChapter, results='hold', echo=FALSE}
+timePerChapter %>%
+  kable(
+    "latex",
+    col.names = c("Chapter", "Mean"),
+    caption = "Duration per Chapter for All Docker Images",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped",
+    full_width = T
     )
 ```
