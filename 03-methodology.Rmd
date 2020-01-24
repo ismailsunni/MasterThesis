@@ -10,7 +10,7 @@ knitr::include_graphics('./figure/methodology.png')
 
 The first step is creating docker images for each combination of platform and R implementations. The research uses 6 R implementations (GNU-R, MRO, Renjin, FastR, pqR, and TERR) and 3 platforms (Debian, Fedora, and Arch Linux). It is possible to use another platform with the same package manager if it's found that there is already a working docker image or there is a problem with current platform. This changes for example Ubuntu for Debian.
 
-After that, the system dependencies for geospatial R packages are installed. The list of dependencies are taken from [@RhubSysreqsdb2019] database. If there is uninstalled system dependencies or missing dependencies, they are noted and reported to the repository. The next step is installing all R packages in the Spatial and SpatioTemporal view by using CTV packages[@NA] wherever possible. If it is not possible, installing one by one packages will be done. All failed installation will be tried to fix or noted if it is not possible to fix.
+After that, the system dependencies for geospatial R packages are installed. The list of dependencies are taken from [@RhubSysreqsdb2019] database. If there is uninstalled system dependencies or missing dependencies, they are noted and reported to the repository. The next step is installing all R packages in the Spatial and SpatioTemporal view by using CTV packages [@CTV] wherever possible. If it is not possible, installing one by one packages will be done. All failed installation will be tried to fix or noted if it is not possible to fix.
 
 In the end, there are 36 docker images for all combination between platforms, R implementations, and geospatial R packages if all is done.
 

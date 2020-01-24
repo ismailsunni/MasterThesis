@@ -15,102 +15,193 @@ This appendix contains links to the source code that is used for this research.
 2. A collection of docker image of various R implementations on various platform both vanilla and with geospatial R packages: [dockeRs](https://github.com/ismailsunni/dockeRs)
 3. This master thesis writing: [master-thesis](https://github.com/ismailsunni/master-thesis)
 
-# SDSR Benchmark per Chapter
+# SDSR Benchmark per Chapter {#apendix-benchmark-per-chapter}
 
 This appendix contains all the result of benchmark per chapter in the SDSR book.
 
-## Box Plot for Duration
-
-In this part, all box plot for each chapter duration are shown.
-
-```{r 01-hello-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 01 hello', out.width = "400px"}
-knitr::include_graphics('./figure/plots/01-hello.png')
+```{r Chapter01SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["01-hello.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 01 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 02-spaces-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 02 Spaces', out.width = "400px"}
-knitr::include_graphics('./figure/plots/02-Spaces.png')
+```{r Chapter02SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["02-Spaces.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 02 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 03-geometries-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 03 Geometries', out.width = "400px"}
-knitr::include_graphics('./figure/plots/03-Geometries.png')
+```{r Chapter03SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["03-Geometries.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 03 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 04-raster-cube-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 04 Raster Cube', out.width = "400px"}
-knitr::include_graphics('./figure/plots/04-Raster-Cube.png')
+```{r Chapter04SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["04-Raster-Cube.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 04 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 05-geommanipulations-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 05 GeomManipulations', out.width = "400px"}
-knitr::include_graphics('./figure/plots/05-GeomManipulations.png')
+```{r Chapter05SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["05-GeomManipulations.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 05 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 06-attributes-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 06 Attributes', out.width = "400px"}
-knitr::include_graphics('./figure/plots/06-Attributes.png')
+```{r Chapter06SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["06-Attributes.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 06 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 07-referencesystems-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 07 Reference Systems', out.width = "400px"}
-knitr::include_graphics('./figure/plots/07-ReferenceSystems.png')
+```{r Chapter07SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["07-ReferenceSystems.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 07 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 08-plotting-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 08 Plotting', out.width = "400px"}
-knitr::include_graphics('./figure/plots/08-Plotting.png')
+```{r Chapter08SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["08-Plotting.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 08 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 09-baseplot-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 09 BasePlot', out.width = "400px"}
-knitr::include_graphics('./figure/plots/09-BasePlot.png')
+```{r Chapter09SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["09-BasePlot.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 09 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 10-ggplot2-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 10 Ggplot2', out.width = "400px"}
-knitr::include_graphics('./figure/plots/10-Ggplot2.png')
+```{r Chapter10SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["10-Ggplot2.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 10 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```
 
-```{r 98-rbascis-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 98 rbascis', out.width = "400px"}
-knitr::include_graphics('./figure/plots/98-rbascis.png')
-```
-
-## Box Plot for Duration Ratio
-
-In this part, all box plot for each chapter duration ratio are shown.
-
-```{r ratio-01-hello-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 01 hello (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_01-hello.png')
-```
-
-```{r ratio-02-spaces-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 02 Spaces (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_02-Spaces.png')
-```
-
-```{r ratio-03-geometries-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 03 Geometries (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_03-Geometries.png')
-```
-
-```{r ratio-04-raster-cube-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 04 Raster Cube (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_04-Raster-Cube.png')
-```
-
-```{r ratio-05-geommanipulations-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 05 GeomManipulations (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_05-GeomManipulations.png')
-```
-
-```{r ratio-06-attributes-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 06 Attributes (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_06-Attributes.png')
-```
-
-```{r ratio-07-referencesystems-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 07 Reference Systems (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_07-ReferenceSystems.png')
-```
-
-```{r ratio-08-plotting-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 08 Plotting (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_08-Plotting.png')
-```
-
-```{r ratio-09-baseplot-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 09 BasePlot (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_09-BasePlot.png')
-```
-
-```{r ratio-10-ggplot2-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 10 Ggplot2 (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_10-Ggplot2.png')
-```
-
-```{r ratio-98-rbascis-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='SDSR Benchmark Chapter 98 rbascis (Duration Ratio)', out.width = "400px"}
-knitr::include_graphics('./figure/plots/ratio_98-rbascis.png')
+```{r Chapter98SummaryTable, results='asis', echo=FALSE}
+benchmark_result_per_chapter[["98-rbascis.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor) %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 98 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
 ```

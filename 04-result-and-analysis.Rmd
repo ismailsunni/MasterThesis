@@ -161,7 +161,7 @@ normalize_benchmark_boxplot(
 
 It also can be check which chpater of the book that takes the most time to run in table \@ref(tab:longestChapter). Chapter `04-Raster-Cube.R` takes the most of the time compared to other chapters with 26.01 seconds. From here we can examine the benchmark result of chapter `04-Raster-Cube.R`.
 
-Based on table \@ref(tab:Chapter04SummaryTable) the difference between the docker images are not big. It is more clear in the normalized benchmark table \@ref(tab:Chapter04NormalizedTable) that MRO needs around at most 1.2x time compared to the GNU R one. There is also no outlier in the benchmark `04-Raster-Cube.R` as shown in box plot figure \@ref(fig:Chapter04BoxPlot)
+Based on table \@ref(tab:Chapter04SummaryTable) the difference between the docker images are not big. It is more clear in the normalized benchmark table \@ref(tab:Chapter04NormalizedTable) that MRO needs around at most 1.2x time compared to the GNU R one. There is also no outlier in the benchmark `04-Raster-Cube.R` as shown in box plot figure \@ref(fig:Chapter04BoxPlot). Full result for benchmark per chapter can be found in apendix \@ref(apendix-benchmark-per-chapter).
 
 ```{r find_longest_chapter, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library('plyr')
@@ -198,7 +198,7 @@ chapter04SummaryTable <- benchmark_result_per_chapter[["04-Raster-Cube.R"]] %>%
                 )
 ```
 
-```{r Chapter04SummaryTable, results='hold', echo=FALSE}
+```{r appendixtablechapter04, results='hold', echo=FALSE}
 chapter04SummaryTable %>%
   kable(
     "latex",
