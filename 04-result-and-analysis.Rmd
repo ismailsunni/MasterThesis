@@ -131,8 +131,7 @@ summaryTableSDSR %>%
     caption = "SDSR Benchmark",
     booktabs = T) %>%
   kable_styling(
-    latex_options = "striped",
-    full_width = T
+    latex_options = "striped"
     )
 ```
 
@@ -144,8 +143,7 @@ normalizeSummaryTableSDSR %>%
     caption = "Normalized SDSR Benchmark",
     booktabs = T) %>%
   kable_styling(
-    latex_options = "striped",
-    full_width = T
+    latex_options = "striped"
     )
 ```
 
@@ -162,6 +160,8 @@ normalize_benchmark_boxplot(
 ```
 
 It also can be check which chpater of the book that takes the most time to run in table \@ref(tab:longestChapter). Chapter `04-Raster-Cube.R` takes the most of the time compared to other chapters with 26.01 seconds. From here we can examine the benchmark result of chapter `04-Raster-Cube.R`.
+
+Based on table \@ref(tab:Chapter04SummaryTable) the difference between the docker images are not big. It is more clear in the normalized benchmark table \@ref(tab:Chapter04NormalizedTable) that MRO needs around at most 1.2x time compared to the GNU R one. There is also no outlier in the benchmark `04-Raster-Cube.R` as shown in box plot figure \@ref(fig:Chapter04BoxPlot)
 
 ```{r find_longest_chapter, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library('plyr')
@@ -185,5 +185,62 @@ timePerChapter %>%
   kable_styling(
     latex_options = "striped",
     full_width = T
+    )
+```
+
+```{r createChapter04SummaryTable, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+chapter04SummaryTable <- benchmark_result_per_chapter[["04-Raster-Cube.R"]] %>% 
+      group_by(expr) %>% 
+      summarise(mintime = min(time) / nano_time_factor,
+                meantime = mean(time) / nano_time_factor,
+                mediantime = median(time) / nano_time_factor,
+                maxtime = max(time) / nano_time_factor
+                )
+```
+
+```{r Chapter04SummaryTable, results='hold', echo=FALSE}
+chapter04SummaryTable %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Chapter 04 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
+```
+
+```{r createChapter04NormalizedTable, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+chapter04NormalizedTable <- benchmark_result_per_chapter[["04-Raster-Cube.R"]] %>% 
+      normalize_benchmark_result('gnu-r on debian') %>%
+      group_by(expr) %>% 
+      summarise(mintime = min(time),
+                meantime = mean(time),
+                mediantime = median(time),
+                maxtime = max(time)
+                )
+```
+
+```{r Chapter04NormalizedTable, results='hold', echo=FALSE}
+chapter04NormalizedTable %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Normalized Chapter 04 Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
+```
+
+```{r Chapter04BoxPlot, echo=FALSE, fig.align='center', fig.cap='Chapter 04 Benchmark', fig.width = 10, out.width=400, fig.show='hold'}
+benchmark_boxplot(benchmark_result_per_chapter[["04-Raster-Cube.R"]], main = 'Chapter 04 Benchmark')
+```
+
+```{r NormalizedChapter04BoxPlot, echo=FALSE, fig.align='center', fig.cap='Normalized Chapter 04 Benchmark', fig.width = 10, out.width=400, fig.show='hide'}
+normalize_benchmark_boxplot(
+    benchmark_result_per_chapter[["04-Raster-Cube.R"]], 
+    baseline_image = 'gnu-r on debian', 
+    main = 'Normalized Chapter 04 Benchmark'
     )
 ```
