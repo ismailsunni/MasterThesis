@@ -70,7 +70,7 @@ options(digits=3)
 
 ### Baseline Benchmark
 
-`altRnative` package that is used for benchmarking is using docker images for each R implementation and platform. In this case there is already elapsed time for running the container and destroy it. Baseline benchmark is used to check the time spent for this process. To do it, a very simple R script (`1 + 1`) is run 10 times for each docker image. The summary can be seen at table \@ref(tab:summaryTableBaseline). It's clear that there is not so much different between docker images for this baseline benchmark. The distribution of the baseline benchmark is shown in box plot figure \@ref(fig:baseline-benchmark).
+`altRnative` package that is used for benchmarking is using docker images for each R implementation and platform. In this case there is already elapsed time for running the container and destroy it. Baseline benchmark is used to check the time spent for this process. To do it, a very simple R script (`1 + 1`) is run 10 times for each docker image. The summary can be seen at table \@ref(tab:summaryTableBaseline). It's clear that there is not so much different between docker images for this baseline benchmark. The distribution of the baseline benchmark is shown in box plot figure \@ref(fig:baseline-benchmark). There are two outliers observation, but in general the result is quite similar within 0.1 second range for the mean.
 
 ```{r baseline-benchmark, echo=FALSE, fig.align='center', fig.cap='Baseline Benchmark', fig.width = 10, out.width=400}
 benchmark_boxplot(baseline_benchmark, main = 'Baseline Benchmark')
@@ -100,7 +100,7 @@ summaryTableBaseline %>%
 
 ### Geospatial Workflow Benchmark
 
-For running geospatial workflow, the code from SDSR book is extracted using an R script to avoid overhead time in knitting the book. The result of this benchmark can be seen in box plot \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all docker images. We can see also that GNU R has better performance compared to MRO regarldess the operating system. For better view of the speed comparison, another box plot is created to show the ratio of the duration compared to the mean of elapsed time for GNU R on Debian. The result can be seen at figure \@ref(fig:ratio-sdsr-benchmark). MRO spent around 1.2x times compared to GNU R.
+For running geospatial workflow, the code from SDSR book is extracted using an R script to avoid overhead time in knitting the book process. The result of this benchmark can be seen in table \@ref(tab:summaryTableSDSR) and its distribution in box plot figure \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all docker images. We can see also that GNU R has better compared (~27-28 seconds) to MRO (~33 seconds) regarldess the operating system. For better view of the speed comparison, a normalized time is created by using the mean of time for GNU R on Debian as the baseline. The result is shown in table \@ref(tab:normalizeSummaryTableSDSR). It's clear that MRO needs 1.25x time compared to GNU R.
 
 ```{r create_summary_table_sdsr, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 summaryTableSDSR <- sdsr_code_benchmark %>% 
@@ -111,6 +111,18 @@ summaryTableSDSR <- sdsr_code_benchmark %>%
                 maxtime = max(time) / nano_time_factor
                 )
 ```
+
+```{r create_summary_normalize_table_sdsr, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+normalizeSummaryTableSDSR <- sdsr_code_benchmark %>% 
+      normalize_benchmark_result('gnu-r on debian') %>%
+      group_by(expr) %>% 
+      summarise(mintime = min(time),
+                meantime = mean(time),
+                mediantime = median(time),
+                maxtime = max(time)
+                )
+```
+
 
 ```{r summaryTableSDSR, results='asis', echo=FALSE}
 summaryTableSDSR %>%
@@ -124,11 +136,24 @@ summaryTableSDSR %>%
     )
 ```
 
+
+```{r normalizeSummaryTableSDSR, results='asis', echo=FALSE}
+normalizeSummaryTableSDSR %>%
+  kable(
+    "latex",
+    col.names = c("Docker Image", "Min", "Mean", "Median", "Max"),
+    caption = "Normalized SDSR Benchmark",
+    booktabs = T) %>%
+  kable_styling(
+    latex_options = "striped"
+    )
+```
+
 ```{r sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='Duration for All Code SDSR Benchmark', fig.width = 10, out.width=400}
 benchmark_boxplot(sdsr_code_benchmark, main = 'Duration for All Code SDSR Benchmark')
 ```
 
-```{r ratio-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='Duration Ratio for All SDSR Code', fig.width = 10, out.width=400}
+```{r ratio-sdsr-benchmark, echo=FALSE, fig.align='center', fig.cap='Duration Ratio for All SDSR Code', fig.width = 10, out.width=400, fig.show='hide'}
 normalize_benchmark_boxplot(
     sdsr_code_benchmark, 
     baseline_image = 'gnu-r on debian', 
