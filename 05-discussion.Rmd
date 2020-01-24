@@ -8,10 +8,9 @@ Based on the result in Chapter 4, the problem found when creating docker image f
 
 
 ```{r commonProblemTable, results="asis", echo=FALSE}
-
 commonProblem <- data.frame(
   problem = c(
-    rep("System Dependencies", 3), 
+    rep("System Dependencies", 4), 
     rep("Unsupported Implementation", 3),
     rep("Running Time Problem", 2)
     ),
@@ -19,6 +18,7 @@ commonProblem <- data.frame(
     'Outdated or missing dependencies from sysreqsdb for example v8, sqlite, gfortran.',
     'System dependencies not available on the platform. For example GDAL is too old on Oracle Linux.',
     'System dependencies are installed but not usable. For example Udunits on Renjin',
+    'System dependencies are too new for the R packages. For example `sf` in MRO 3.5.3',
     
     'pqR is based on GNU R version 2.15.1 thus it does not support `sf`',
     'Renjin needs to download everytime it tries to load a package',
@@ -34,6 +34,8 @@ commonProblem %>%
   column_spec(2, width = "30em") %>%
   row_spec(0, bold = T) %>%
   collapse_rows(columns = 1:1, valign = "middle")
+```
+
 ```
 
 ### System Dependencies
@@ -61,7 +63,7 @@ After successful installation of system dependencies, it does not always work pr
 
 ### Unsupported Implementation
 
-The second common problem is unsupported implementation which refers to the implementation of R itself. This problem occurs because there is no support for a specific feature like in GNU R. For example, pqR is created based on GNU R version 2.15.1. In this case, it is not possible to install R packages which requires newer version of R, for example `sf` which needs R version 3.3.0[@pebesmaSfSimpleFeatures2019]. Another example is Renjin which does not support external native libraries. Many R packages are incompatible with Renjin because of this for example `units` package that needs `udunits2`[@RenjinOrgUnits].
+The second common problem is unsupported implementation which refers to the implementation of R itself. This problem occurs because there is no support for a specific feature like in GNU R. For example, pqR is created based on GNU R version 2.15.1. In this case, it is not possible to install R packages which requires newer version of R, for example `sf` which needs R version 3.3.0 [@pebesmaSfSimpleFeatures2019]. Another example is Renjin which does not support external native libraries. Many R packages are incompatible with Renjin because of this for example `units` package that needs `udunits2` [@RenjinOrgUnits].
 
 For this kind of problem, there is not so much that user can do beside hoping that the R implementation will supoprt the features. Another solution is jumping to the R implementation development itself. Unfortunately, this kind of task is not trivial.
 

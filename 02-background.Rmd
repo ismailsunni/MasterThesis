@@ -36,7 +36,7 @@ From 10 major Linux distribution based on [@distrowatchDistroWatchComPut2019], D
 
 ## Container
 
-A container is computer software that is used to package and run an application and all of its dependencies [@dockerWhatContainer2019]`. Since it is isolated from the external system, users can set up anything that is needed and run even complex software environments on another computer easily. This ability enables the developer to create different computational environments to run a specific software. In testing, it is very useful since you can have a well-defined configuration, especially if you need specific versions dependencies [@manuelweissHowDockerMakes2016]. An R package called `stevedore` can be used to work with container by using the Docker API [@fitzjohnStevedoreDockerClient2019].
+A container is computer software that is used to package and run an application and all of its dependencies [@dockerWhatContainer2019]. Since it is isolated from the external system, users can set up anything that is needed and run even complex software environments on another computer easily. This ability enables the developer to create different computational environments to run a specific software. In testing, it is very useful since you can have a well-defined configuration, especially if you need specific versions dependencies [@manuelweissHowDockerMakes2016]. An R package called `stevedore` can be used to work with container by using the Docker API [@fitzjohnStevedoreDockerClient2019].
 
 ## Benchmarking in R
 

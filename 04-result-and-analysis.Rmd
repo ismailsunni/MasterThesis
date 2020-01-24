@@ -51,6 +51,8 @@ There is already pqR docker image for Debian[@nustNuestPqrdocker2019]. Unfortuna
 
 Although TERR is not free and open, TIBCO provides TERR for free with Developer Evaluation license [@TIBCOEnterpriseRuntime]. This license has a limitation which prevent pubslishing the docker image of TERR[@TIBCOEnterpriseRuntime]. With this limitation, this research only provides Dockerfile to build the docker image that needs the installer that can be obtained from the TIBCO website. TERR is successfully installed for Debian and Ubuntu. Unfortunately, there is a problem when R geospatial packages are tried to be installed. If there is already a package installed, it is not possible to re-install the package. For example, package `vctrs` is already installed from another R packages installation, if we want to install `RSQLite` which depends on `vctrs` it will turns an error. From this problem, it is not possible to install geospatial packages which have a same R package dependency.
 
+Another problem found is related to `rJava` package. An error message suggest to run `R CMD javareconf` for successful `rJava` installation. Unfortunately, this `javareconf` is not available in TERR.
+
 Since it is not possible to install R geospatial packages with Debian and Ubuntu, we do not continue the exploration for Fedora and Arch Linux.
 
 ## Benchmark {#benchmark}
