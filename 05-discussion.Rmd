@@ -75,10 +75,18 @@ Similar as problem with unsupported implementation, this kind of error is also h
 
 The benchmark result from the experiment is quite clear as previously mentioned in chapter \@ref(benchmark). The platform difference almost does not give any difference and GNU R performs a little bit better (~1.1x faster) compared to MRO regardless the platform for geospatial workflow. This not a surprise since MRO's strength is about matrix or vector operation [@BenefitsMultithreadedPerformance] while geospatial workflow in the SDSR books doesn't need a lot of matrix or vector operation.
 
-## Limitation and Possible Improvement
+## Limitation and Recommendations
 
-### Limitations
+### Docker Images Creation
 
-### Possible Improvement
+Docker image creation takes long time especially if there is limited information or stumbled on a problem. There are some possible fixes that can be done to create more geospatial docker images.
 
+1. Downgrade packages in Arch Linux so that it can use GDAL 2.x to support installation of MRO 3.5.3. Due to time limitatio and last minute knowledge about unofficial MRO package on AUR[@AURMicrosoftropen], this solution has not been checked.
+2. Create docker image based on Fedora 30 or 32 to install FastR 3.6.1 for an updated packages support. This research has only done FastR on Oracle Linux 7.
+3. Create docker image for Windows to explore the compatibility of geospatial packages and get more performance comparison.  
 
+### Benchmarking Tool
+
+The altRnative package has shown its capability to perform benchmark accross multiple R implementation and platform. But there are some areas that can improved to get better result. Adding a feature to run benchmark from existing docker container or custom docker image will make it more flexibility to setup the benchmark process. This feature will also unlock the possibility to run benchmark not only for geospatial R workflow or non R script. In this case, altRnative will be a universal benchmarking tool.
+
+Another improvement is adding profiling feature to know which part of the code that spend the most of the time. There is already an R package for profiling [@ProfvisInteractiveVisualizations]. altRnative can use this R package to get the profiling tool, just like it uses microbenchmark to do the benchmarking.
