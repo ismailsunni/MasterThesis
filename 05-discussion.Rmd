@@ -1,5 +1,50 @@
 # Discussion {#discussion}
 
+This chapter contains the discussion about the result from the research. It is divided into three parts. First, the common problems that is found when creating docker image for various R implementation and platform is compiled. The result of the benchmark is dicussed on the second part. The last part discuss about the limitation and the possible improvement of the research.
+
 ## Common Problems for R Implementations and Platform
 
+Based on the result in Chapter 4, the problem found when creating docker image for different R implementation on different platform can be grouped into three kind of problem. The first one is related to system dependencies, second is related to unsupported implementation, and the last one is about error or problem in running time. Example of each common problem can be seen in table \@ref(tab:commonProblemTable). Below for each common problem is discussed.
+
+### System Dependencies
+
+### Unsupported Implementation
+
+### Running Time Error
+
+```{r commonProblemTable, results="asis", echo=FALSE}
+
+commonProblem = data.frame(
+  
+)
+
+commonProblem <- data.frame(
+  problem = c(
+    rep("System Dependencies", 3), 
+    rep("Unsupported Implementation", 3),
+    rep("Running Time Problem", 2)
+    ),
+  example = c(
+    'Outdated or missing dependencies from sysreqsdb for example v8, sqlite, gfortran.',
+    'System dependencies not available on the platform. For example GDAL is too old on Oracle Linux.',
+    'System dependencies are installed but not usable. For example Udunits on Renjin',
+    
+    'pqR is based on GNU R version 2.15.1 thus it does not support `sf`',
+    'Renjin needs to download everytime it tries to load a package',
+    'TERR does not have javareconf command/file',
+    
+    'Error reinstalling R package on TERR',
+    'Error loading gpkg with `sf` for FastR'
+    )
+  )
+commonProblem %>% 
+  kable(col.names = c('Problem', 'Example'), caption = "Common Problems") %>%
+  kable_styling(full_width = T, latex_options = "striped") %>%
+  column_spec(2, width = "30em") %>%
+  row_spec(0, bold = T) %>%
+  collapse_rows(columns = 1:1, valign = "middle")
+```
+
 ## Benchmark Result
+
+## Limitation and Possible Improvement
