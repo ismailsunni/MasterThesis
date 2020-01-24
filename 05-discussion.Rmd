@@ -6,17 +6,8 @@ This chapter contains the discussion about the result from the research. It is d
 
 Based on the result in Chapter 4, the problem found when creating docker image for different R implementation on different platform can be grouped into three kind of problem. The first one is related to system dependencies, second is related to unsupported implementation, and the last one is about error or problem in running time. Example of each common problem can be seen in table \@ref(tab:commonProblemTable). Below for each common problem is discussed.
 
-### System Dependencies
-
-### Unsupported Implementation
-
-### Running Time Error
 
 ```{r commonProblemTable, results="asis", echo=FALSE}
-
-commonProblem = data.frame(
-  
-)
 
 commonProblem <- data.frame(
   problem = c(
@@ -45,6 +36,42 @@ commonProblem %>%
   collapse_rows(columns = 1:1, valign = "middle")
 ```
 
+### System Dependencies
+
+In this research, system dependencies are taken from sysreqsdb which provide list of system dependencies for each R package based on the metadata. This database is almost complete, there is only two outdated system dependencies for Fedora 32 as shown in table \@ref(tab:sysreqsdbUpdate). Some docker image needs to install another system dependencies that are not available in the base image for example `gfortran`, `sqlite`, and `sqlite-devel`. But in this case it's more on that the system dependencies are not mentioned in the R packages. This kind of errors are relatively easy to solve for example by checking the new name of the package and try to install it again.
+
+```{r sysreqsdbUpdate, results="asis", echo=FALSE}
+differenceSysReqsDB = data.frame(
+  c('libproj', 'v8'),
+  c('proj-devel proj-epsg proj-nad', 'v8-314-devel'),
+  c('proj-devel proj', 'v8-devel')
+)
+
+differenceSysReqsDB %>% kable(col.names = c('Library', 'SysReqsDB', 'Fedora 32'), caption = 'Difference between SysreqsDB and Fedora 32') %>%
+  kable_styling(full_width = T, latex_options = "striped") %>%
+  row_spec(0, bold = T)
+```
+
+Another kind of problem is related with the platform. Platforms do not provide the same support for system dependencies.
+For example, in Oracle Linux 7 does not have GDAL by default. It needs to add Extra Package for Enterprise Linux (EPEL) to get GDAL and other packages[@EPELFedoraProject]. It turns out, GDAL from EPEL is very old (version 1.11). In this case, GDAL must be built from source. It applies for other packages also which need the newer version and it is not always easy to build from source.
+
+Reversely, some packages needs older version of system dependencies. For example, `sf` on MRO 3.5.3 needs GDAL version 2.x not 3.x. Fedora 32 has GDAL version 3 while Fedora 30 has GDAL version 2. This happens because `sf` on MRO 3.5.3 snapshot is the old version (v 0.7.3) which depends on GDAL 2.x. To solve this kind of problem, it's either downgrade the packages or wait for the newer release.
+
+After successful installation of system dependencies, it does not always work properly in the R environment. For example, `Proj` is said that it has configuration error on FastR on Debian/Ubuntu although it can be used properly. This issue has not been solved yet for Debian/Ubuntu.
+
+### Unsupported Implementation
+
+The second common problem is unsupported implementation which refers to the implementation of R itself. This problem occurs because there is no support for a specific feature like in GNU R. For example, pqR is created based on GNU R version 2.15.1. In this case, it is not possible to install R packages which requires newer version of R, for example `sf` which needs R version 3.3.0[@pebesmaSfSimpleFeatures2019]. Another example is Renjin which does not support external native libraries. Many R packages are incompatible with Renjin because of this for example `units` package that needs `udunits2`[@RenjinOrgUnits].
+
+For this kind of problem, there is not so much that user can do beside hoping that the R implementation will supoprt the features. Another solution is jumping to the R implementation development itself. Unfortunately, this kind of task is not trivial.
+
+### Running Time Error
+
+The last kind of error is Running Time Error. This error happens after package installation is finished succesfully. This error is hard to find since it can be anything. Based on the SDSR book, the research found three running time error. The first one is different behaviour of `sf` from GNU R with different GDAL and Proj version [@ProblemArchLinux]. There is a change of behaviour on GDAL/Proj that is passed to `sf`. Second running time error is on `sf` from FastR on Oracle Linux 7. In this error, `sf` can not read `gpkg` file[@SfInstalledNot]. The last is related to TERR which explained in \@ref(docker-image-terr).
+
+Similar as problem with unsupported implementation, this kind of error is also hard to fix. It is either waiting for the bug to be fixed or fix the bug itself which is not easy task to do.
+
 ## Benchmark Result
+
 
 ## Limitation and Possible Improvement

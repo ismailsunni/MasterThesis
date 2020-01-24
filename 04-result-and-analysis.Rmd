@@ -47,7 +47,7 @@ From these results, it's concluded that it's not possible to install geospatial 
 
 There is already pqR docker image for Debian[@nustNuestPqrdocker2019]. Unfortunately, the latest version of pqR is based on GNU R 2.15.0 [@m.nealPqRPrettyQuick2019]. This makes geospatial packages like `sf` not compatible with it since `sf` needs R version > 3.3.0.[@pebesmaSfSimpleFeatures2019]. Since it is not possible to install geospatial R packages, the docker images for Fedora and Arch Linux are not created since it will not possible to install geospatial R packages also.
 
-### TIBCO Enterprise Runtime for R (TERR)
+### TIBCO Enterprise Runtime for R (TERR) {#docker-image-terr}
 
 Although TERR is not free and open, TIBCO provides TERR for free with Developer Evaluation license [@TIBCOEnterpriseRuntime]. This license has a limitation which prevent pubslishing the docker image of TERR[@TIBCOEnterpriseRuntime]. With this limitation, this research only provides Dockerfile to build the docker image that needs the installer that can be obtained from the TIBCO website. TERR is successfully installed for Debian and Ubuntu. Unfortunately, there is a problem when R geospatial packages are tried to be installed. If there is already a package installed, it is not possible to re-install the package. For example, package `vctrs` is already installed from another R packages installation, if we want to install `RSQLite` which depends on `vctrs` it will turns an error. From this problem, it is not possible to install geospatial packages which have a same R package dependency.
 
