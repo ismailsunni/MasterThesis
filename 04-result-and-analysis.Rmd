@@ -4,14 +4,46 @@ In this part, the result of the research and the analysis of the result is shown
 
 ## Docker Images
 
-In this section, the exploration's result of each combination between R implementations and platforms for the R installation and geospatial packages installation are shown. The result is described per each R implementations. The overview of the result can be seen in figure \@ref(fig:docker-images-r) and \@ref(fig:docker-images-geospatial-r). There are some symbol in those two figures that can be explained using the legend in figure \@ref(fig:docker-images-legend)
+In this section, the exploration's result of each combination between R implementations and platforms for the R installation and geospatial packages installation are shown. The result is described per each R implementations. The overview of the result can be seen in figure \@ref(tab:vanillaRDockerImagesTable) and \@ref(tab:geospatialRDockerImagesTable). There are some symbol in those two figures that can be explained using the legend in figure \@ref(fig:docker-images-legend)
 
-```{r docker-images-r, echo=FALSE, fig.align='center', fig.cap='Docker Images with R', out.width = "400px"}
-knitr::include_graphics('./figure/docker_images_vanilla_r.jpg')
+```{r loadLibrary, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+library('kableExtra')
+library('microbenchmark')
+library('altRnative')
 ```
 
-```{r docker-images-geospatial-r, echo=FALSE, fig.align='center', fig.cap='Docker Images with Geospatial R Pacakges', out.width = "400px"}
-knitr::include_graphics('./figure/docker_images_geospatial.jpg')
+```{r vanillaRDockerImagesTable, results="asis", echo=FALSE}
+vanillaRDockerImages <- data.frame(
+  gnur = c('Y', 'Y', 'Y'),
+  mro = c('Y', 'Y', 'Y'),
+  renjin = c('Y', 'S', 'S'),
+  fastr = c('Y', 'Y', 'S'),
+  pqr = c('Y', 'S', 'S'),
+  terr = c('Y', 'S', 'S'),
+  row.names = c('Debian', 'Fedora', 'Arch Linux')
+  )
+vanillaRDockerImages %>%
+  kable(col.names = c('GNU R', 'MRO', 'Renjin', 'FastR', 'pqR', 'TERR'), caption = "Vanilla R Docker Images") %>%
+  kable_styling(full_width = T, latex_options = "striped") %>%
+  row_spec(0, bold = T) %>%
+  column_spec(1, bold = T)
+```
+
+```{r geospatialRDockerImagesTable, results="asis", echo=FALSE}
+geospatialRDockerImages <- data.frame(
+  gnur = c('Y', 'Y', 'Y'),
+  mro = c('Y', 'Y', '?'),
+  renjin = c('N', 'N', 'N'),
+  fastr = c('N', 'N', 'N'),
+  pqr = c('N', 'N', 'N'),
+  terr = c('N', 'N', 'N'),
+  row.names = c('Debian', 'Fedora', 'Arch Linux')
+  )
+geospatialRDockerImages %>%
+  kable(col.names = c('GNU R', 'MRO', 'Renjin', 'FastR', 'pqR', 'TERR'), caption = "Geospatial R Docker Images") %>%
+  kable_styling(full_width = T, latex_options = "striped") %>%
+  row_spec(0, bold = T) %>%
+  column_spec(1, bold = T, width = '100em')
 ```
 
 ```{r docker-images-legend, echo=FALSE, fig.align='center', fig.cap='Legends', out.width = "200px"}
@@ -60,9 +92,6 @@ Since it is not possible to install R geospatial packages with Debian and Ubuntu
 In this section, the result of the benchmark is shown and explained for baseline benchmark and geospatial workflow benchmark
 
 ```{r load_data, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
-library('microbenchmark')
-library('altRnative')
-library('kableExtra')
 baseline_benchmark = readRDS(file = "./data/simple_benchmark_result.rds")  # 1 + 1
 benchmark_result_per_chapter = readRDS(file = "./data/benchmark_result.rds")  # per chapter
 sdsr_code_benchmark = readRDS(file = "./data/sdsr_code_benchmark_result.rds") # all code in one run

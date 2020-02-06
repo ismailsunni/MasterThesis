@@ -36,8 +36,6 @@ commonProblem %>%
   collapse_rows(columns = 1:1, valign = "middle")
 ```
 
-```
-
 ### System Dependencies
 
 In this research, system dependencies are taken from sysreqsdb which provide list of system dependencies for each R package based on the metadata. This database is almost complete, there is only two outdated system dependencies for Fedora 32 as shown in table \@ref(tab:sysreqsdbUpdate). Some docker image needs to install another system dependencies that are not available in the base image for example `gfortran`, `sqlite`, and `sqlite-devel`. But in this case it's more on that the system dependencies are not mentioned in the R packages. This kind of errors are relatively easy to solve for example by checking the new name of the package and try to install it again.
