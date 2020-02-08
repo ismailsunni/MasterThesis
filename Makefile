@@ -12,7 +12,7 @@ pdf0:
 # bookdown::gitbook
 
 view:
-	google-chrome _book/index.html
+	google-chrome ./_book/index.html
 
-pdf:
-	Rscript --quiet _render.R "bookdown::pdf_book"
+open-pdf:
+	gnome-open _book/thesis.pdf

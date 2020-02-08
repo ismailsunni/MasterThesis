@@ -52,10 +52,6 @@ geospatialRDockerImages %>%
   column_spec(1, bold = T)
 ```
 
-```{r docker-images-legend, echo=FALSE, fig.align='center', fig.cap='Legends', out.width = "200px"}
-knitr::include_graphics('./figure/docker_images_legend.jpg')
-```
-
 ### GNU R
 
 All combinations of GNU R with Debian, Fedora, and Arch Linux can be created for both vanilla R and with geospatial R packages. The only unsolved problem is installation of some system dependencies like `v8` and `saga-gis` on Arch Linux. Because of this R packages which needs this packages can not be installed also. Installation of system dependencies on docker image for Arch Linux is trickier compare to in Debian and Fedora for a package that exist in Arch User Repository (AUR)[@AURHome].
