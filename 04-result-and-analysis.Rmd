@@ -14,36 +14,42 @@ library('altRnative')
 
 ```{r vanillaRDockerImagesTable, results="asis", echo=FALSE}
 vanillaRDockerImages <- data.frame(
-  gnur = c('Y', 'Y', 'Y'),
-  mro = c('Y', 'Y', 'Y'),
-  renjin = c('Y', 'S', 'S'),
-  fastr = c('Y', 'Y', 'S'),
-  pqr = c('Y', 'S', 'S'),
-  terr = c('Y', 'S', 'S'),
+  gnur = c('Yes', 'Yes', 'Yes'),
+  mro = c('Yes', 'Yes', 'Yes'),
+  renjin = c('Yes', 'Stop', 'Stop'),
+  fastr = c('Yes', 'Yes', 'Stop'),
+  pqr = c('Yes', 'Stop', 'Stop'),
+  terr = c('Yes', 'Stop', 'Stop'),
   row.names = c('Debian', 'Fedora', 'Arch Linux')
   )
 vanillaRDockerImages %>%
-  kable(col.names = c('GNU R', 'MRO', 'Renjin', 'FastR', 'pqR', 'TERR'), caption = "Vanilla R Docker Images") %>%
-  kable_styling(full_width = T, latex_options = "striped") %>%
+  kable(
+    col.names = c('GNU R', 'MRO', 'Renjin', 'FastR', 'pqR', 'TERR'), 
+    caption = "Vanilla R Docker Images",
+    align = 'c') %>%
+  kable_styling(latex_options = "striped") %>%
   row_spec(0, bold = T) %>%
   column_spec(1, bold = T)
 ```
 
 ```{r geospatialRDockerImagesTable, results="asis", echo=FALSE}
 geospatialRDockerImages <- data.frame(
-  gnur = c('Y', 'Y', 'Y'),
-  mro = c('Y', 'Y', '?'),
-  renjin = c('N', 'N', 'N'),
-  fastr = c('N', 'N', 'N'),
-  pqr = c('N', 'N', 'N'),
-  terr = c('N', 'N', 'N'),
+  gnur = c('Yes', 'Yes', 'Yes'),
+  mro = c('Yes', 'Yes', '?'),
+  renjin = c('No', 'No', 'No'),
+  fastr = c('No', 'No', 'No'),
+  pqr = c('No', 'No', 'No'),
+  terr = c('No', 'No', 'No'),
   row.names = c('Debian', 'Fedora', 'Arch Linux')
   )
 geospatialRDockerImages %>%
-  kable(col.names = c('GNU R', 'MRO', 'Renjin', 'FastR', 'pqR', 'TERR'), caption = "Geospatial R Docker Images") %>%
-  kable_styling(full_width = T, latex_options = "striped") %>%
+  kable(
+    col.names = c('GNU R', 'MRO', 'Renjin', 'FastR', 'pqR', 'TERR'), 
+    caption = "Geospatial R Docker Images",
+    align = 'c') %>%
+  kable_styling(latex_options = "striped") %>%
   row_spec(0, bold = T) %>%
-  column_spec(1, bold = T, width = '100em')
+  column_spec(1, bold = T)
 ```
 
 ```{r docker-images-legend, echo=FALSE, fig.align='center', fig.cap='Legends', out.width = "200px"}
