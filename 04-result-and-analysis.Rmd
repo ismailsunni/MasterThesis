@@ -1,18 +1,24 @@
 # Result and Analysis {#result-analysis}
 
-In this part, the result of the research and the analysis of the result is shown.
+In this chapter, the result of the research is shown. The first one is the result from system dependencies gathering. The second one is the docker images for every combination and its final status. Lastly, the benchmark result is shown.
+
+## System Dependencies
+
+In order to gather all of the system dependencies required by geospatial R packages, R package `sysreqs` is used to access the `sysreqsdb` database. Result for each platform are obtained using this method. These result then used for creating geospatial R docker images. The full result is available online^[https://github.com/ismailsunni/dockeRs/tree/master/scripts/sysreqs].
 
 ## Docker Images
 
-In this section, the exploration's result of each combination between R implementations and platforms for the R installation and geospatial packages installation are shown. The result is described per each R implementations. The overview of the result can be seen in figure \@ref(tab:vanillaRDockerImagesTable) and \@ref(tab:geospatialRDockerImagesTable). There are some symbol in those two figures that can be explained using the legend in figure \@ref(fig:docker-images-legend)
+In this section, the exploration's result of each combination between R implementations and platforms for the R installation and geospatial packages installation are shown. The result is described per each R implementations. The overview of the result can be seen in figure \@ref(tab:vanillaRDockerImagesTable) for docker image without geospatial R package and \@ref(tab:geospatialRDockerImagesTable) for docker image with geospatial R package.
 
-```{r loadLibrary, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+In those two tables, there are four kind of result. The first one is **Yes** which means that the docker image is successfully created and it works as expected for this theses. The second result is **No** which means that the docker image is not possible to create properly. More detail of the failure is explained below. The third one is **Stop**. This result means the docker image is not created because its geospatial R docker image will not work properly based on the other docker image result. And the last one is **?** which means, it may be possible to create the docker image but is not created because of the time limit.
+
+```{r loadLibraryResultAnalysis, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library('kableExtra')
 library('microbenchmark')
 library('altRnative')
 ```
 
-```{r vanillaRDockerImagesTable, results="asis", echo=FALSE}
+```{r vanillaRDockerImagesTable, echo=FALSE}
 vanillaRDockerImages <- data.frame(
   gnur = c('Yes', 'Yes', 'Yes'),
   mro = c('Yes', 'Yes', 'Yes'),
@@ -32,7 +38,7 @@ vanillaRDockerImages %>%
   column_spec(1, bold = T)
 ```
 
-```{r geospatialRDockerImagesTable, results="asis", echo=FALSE}
+```{r geospatialRDockerImagesTable, echo=FALSE}
 geospatialRDockerImages <- data.frame(
   gnur = c('Yes', 'Yes', 'Yes'),
   mro = c('Yes', 'Yes', '?'),
@@ -54,11 +60,25 @@ geospatialRDockerImages %>%
 
 ### GNU R
 
-All combinations of GNU R with Debian, Fedora, and Arch Linux can be created for both vanilla R and with geospatial R packages. The only unsolved problem is installation of some system dependencies like `v8` and `saga-gis` on Arch Linux. Because of this R packages which needs this packages can not be installed also. Installation of system dependencies on docker image for Arch Linux is trickier compare to in Debian and Fedora for a package that exist in Arch User Repository (AUR)[@AURHome].
+#### Debian
 
-Another interesting result is that different PROJ/GDAL version gave a different result for an R code[@ProblemArchLinux]. The recently released GDAL version 3 is used in Arch Linux docker image while the Debian and Fedora use GDAL version 2.
+There is docker image available for GNU R on Debian^[https://hub.docker.com/_/r-base], so there is no need to work on this. This docker image is created by Rocker Project^[https://www.rocker-project.org/]. This project also provides a GNU R docker image with geospatial package^[https://hub.docker.com/r/rocker/geospatial]. Unfortunately, this docker image does not contains all geospatial R package but only for a subset of it. The selected packages are the one which is slow or tricky to install and the one that has general purpose. The geospatial R docker image for this thesis is created by extending the Rocker Project geospatial R docker image (adding the missing package). In the end, both docker image for GNU R on Debian and its geospatial version can be created.
+
+#### Fedora
+
+By using docker image based on Fedora 32, docker image for GNU R on Fedora is created. Based on this docker image, GNU R on Fedora with geospatial is created. There was a problem on installing system dependencies from `sysreqsdb`. The problem is `proj-epsg`, `proj-nad`, and `v8-314-devel` are no longer available. This problem is solved by removing the first two packages and changing the third on to `v8`. In the end, both docker image for GNU R on Fedora and its geospatial version can be created.
+
+#### Arch Linux
+
+Based on archlinux:20200106 docker image, GNU R docker image on Arch Linux is created. From this docker image, GNU R geospatial docker image is created. There is a problem on installing system dependencies since not all of the system dependencies are available in the Arch Linux package database. These system dependencies can be installed from Arch User Repository (AUR)^[https://aur.archlinux.org/]. To install a package from AUR on docker image, it needs to create a user without password. In the end, both docker image for GNU R on Fedora and its geospatial version can be created.
+
+There is interesting finding on Geospatial GNU R on Arch Linux docker image. There is a difference behaviour of R code in this docker image compared to the one on Fedora and Debian. The difference is about CRS comparison. It is caused by different version of GDAL. The Fedora and Debian docker image have GDAL 2.x while this Arch Linux has GDAL 3.x. The issue has been reported to `sf` issue tracker^[https://github.com/r-spatial/sf/issues/1238].
 
 ### Microsoft R Open
+
+#### Debian
+
+#### Fedora
 
 Microsoft R Open only provides installer for Ubuntu, Windows, RHEL/CentOS, and SLES[@DownloadMRAN]. Docker image for Ubuntu is available from [@nustNuestMrodocker2019]. For Fedora it is possible to use the RHEL/CentOS installer. Unfortunately, it is not possible to install `sf` or other packages which needs PROJ althouth PROJ is already installed[@CanInstallSf]. The solution is using older version of Fedora, in this case Fedora 30 from previously Fedora 32. Fedora 30 has PROJ version 5.2 while Fedora 32 has PROJ version 6.2. It seems since MRO is based on R 3.5.3, the `sf` or other packages has better support to use older version of PROJ.
 
