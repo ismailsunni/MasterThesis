@@ -78,7 +78,15 @@ There is interesting finding on Geospatial GNU R on Arch Linux docker image. The
 
 #### Debian
 
+There is a docker image available fro MRO 3.5.3 on Ubuntu 18.04 [@nustNuestMrodocker2019]. From this docker image, MRO 3.5.3 with geospatial R package is created. There are three problems found. The first one is `libav-tools` is no longer availbale on this Ubuntu version. It's changed with `ffmpeg`. Another issue is `gfortran` which is needed for some R packages is not found on the base image, so it should be installed first. The third one is `polyclip` package can not be installed from within MRO^[https://github.com/ismailsunni/dockeRs/issues/32]. It is solved by installing `polyclip` from source. In the end, both docker image for MRO 3.5.3 on Ubuntu and its geospatial version can be created.
+
 #### Fedora
+
+There is no docker image for MRO on Fedora. At first it's created based on the latest version of Fedora (Fedora 32). It works properly until `sf` is tried to installed. There is an error that mentioned `proj_api.h not found in standard or given locations`^[https://github.com/ismailsunni/dockeRs/issues/39]. In the same docker image, GNU R is installed to check whether the issue is MRO specific or the docker image specific. It turns out that it is possible to install `sf` on that docker image for GNU R. In the end, it is solved by using older version of Fedora (Fedora 30). One possibel explanation is that Fedora 32 has `proj` version 6.2 while Fedora 30 has `proj` version 5.2. MRO 3.5.3 is based on GNU R 3.5.3 which has better support for older `proj` version. In the end, both docker image for MRO 3.5.3 on Fedora 30 and its geospatial version can be created.
+
+#### Arch Linux
+
+The is no official support for Arch Linux from MRO.
 
 Microsoft R Open only provides installer for Ubuntu, Windows, RHEL/CentOS, and SLES[@DownloadMRAN]. Docker image for Ubuntu is available from [@nustNuestMrodocker2019]. For Fedora it is possible to use the RHEL/CentOS installer. Unfortunately, it is not possible to install `sf` or other packages which needs PROJ althouth PROJ is already installed[@CanInstallSf]. The solution is using older version of Fedora, in this case Fedora 30 from previously Fedora 32. Fedora 30 has PROJ version 5.2 while Fedora 32 has PROJ version 6.2. It seems since MRO is based on R 3.5.3, the `sf` or other packages has better support to use older version of PROJ.
 
