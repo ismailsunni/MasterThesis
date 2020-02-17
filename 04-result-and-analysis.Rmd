@@ -86,7 +86,14 @@ There is no docker image for MRO on Fedora. At first it's created based on the l
 
 #### Arch Linux
 
-The is no official support for Arch Linux from MRO.
+The is no official support for Arch Linux from MRO but there is an MRO installer from AUR^[https://aur.archlinux.org/packages/microsoft-r-open/]. By using this package, a docker image for MRO 3.5.3 on Arch Linux with tag 20200106 is created. Unfortunately, the docker image for MRO 3.5.3 with geospatial R package is not possible to create using this base image. The reason is because in MRO installed the pinned version of `sf` (based on R 3.5.3) on the snapshot. It expects to have GDAL 2.x which still has `pcs.csv`. This file is removed in GDAL 3.0 which is the current version in the latest Arch Linux.
+
+There is a possibility to downgrade the installed GDAL version to match with the requirement of `sf` in MRO 3.5.3 snapshot. Unfortunately, since the discovery of MRO installer on Arch Linux is very late, the geospatial docker creation is not done due to time limit. In the end, docke image for MRO 3.5.3 on Arch Linux is created but its geospatial version is not created due to time limit.
+
+### Renjin
+
+#### Debian
+
 
 Microsoft R Open only provides installer for Ubuntu, Windows, RHEL/CentOS, and SLES[@DownloadMRAN]. Docker image for Ubuntu is available from [@nustNuestMrodocker2019]. For Fedora it is possible to use the RHEL/CentOS installer. Unfortunately, it is not possible to install `sf` or other packages which needs PROJ althouth PROJ is already installed[@CanInstallSf]. The solution is using older version of Fedora, in this case Fedora 30 from previously Fedora 32. Fedora 30 has PROJ version 5.2 while Fedora 32 has PROJ version 6.2. It seems since MRO is based on R 3.5.3, the `sf` or other packages has better support to use older version of PROJ.
 
