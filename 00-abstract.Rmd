@@ -4,5 +4,7 @@ To make the exploration easier, container technology is used to install system d
 
 A benchmarking R package called `altRnative` is created to run the benchmarking across the successful combination. The benchmark result shows that GNU R has a little bit better performance (1.2x) compared to MRO regardless of the platforms.
 
+Reproducibility self-assessment (https://osf.io/j97zp/): 3, 3, 3, 3, 3 (input data, preprocessing, methods, computational environment, results)
+
 
 **Keywords**: R implementation, benchmark, system dependencies, docker, sysreqsdb
