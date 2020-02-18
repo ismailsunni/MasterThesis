@@ -92,18 +92,11 @@ There is a possibility to downgrade the installed GDAL version to match with the
 
 ### Renjin
 
-#### Debian
-
-
-Microsoft R Open only provides installer for Ubuntu, Windows, RHEL/CentOS, and SLES[@DownloadMRAN]. Docker image for Ubuntu is available from [@nustNuestMrodocker2019]. For Fedora it is possible to use the RHEL/CentOS installer. Unfortunately, it is not possible to install `sf` or other packages which needs PROJ althouth PROJ is already installed[@CanInstallSf]. The solution is using older version of Fedora, in this case Fedora 30 from previously Fedora 32. Fedora 30 has PROJ version 5.2 while Fedora 32 has PROJ version 6.2. It seems since MRO is based on R 3.5.3, the `sf` or other packages has better support to use older version of PROJ.
-
-There is an MRO package for Arch Linux in AUR [@AURMicrosoftropen]. By using this package, MRO can be installed on Arch Linux. Unfortunately, the base image for Arch Linux that is used on the exploration is quite new (tag = 20200106)[@ImageLayerDetails]. This docker image has a new version of GDAL (3.0) which is not compatible with the `sf` version in the MRO 3.5.3 snapshot that still require GDAL 2.0. The difference is GDAL 3.0 no longer has resource files related to EPSG and ESRI CRS  databases like `pcs.csv`[@Release0NewsGDAL]. In this case there is a possibility to downgrade the installed packages or restore all packages to a specific date [@ArchLinuxArchive]. Unfortunately, this step is not taken due to time limit but can be tried in the future works.
-
-### Renjin
-
-Renjin docker image for Debian is available[@nustNuestRenjindockerDockerfiles2019]. Unfortunately, Renjin doesn't support `sf` [@RenjinOrgSf] because Renjin does not support `units` package [@RenjinOrgUnits] which is needed by `sf`. `units` package is not installed even though `udunits2` is available because Renjin does not support packages that depends on external libraries, in this case `udunits2`[@RccpNotFound]. By the same reasons, Fedora and Arch Linux will not be able to install geospatial packages.
+Renjin docker image for Debian is available[@nustNuestRenjindockerDockerfiles2019]. Unfortunately, Renjin doesn't support `sf` [@RenjinOrgSf] because Renjin does not support `units` package [@RenjinOrgUnits] which is needed by `sf`. `units` package is not installed even though `udunits2` is available because Renjin does not support packages that depends on external libraries, in this case `udunits2`[@RccpNotFound]. By the same reasons, Fedora and Arch Linux will not be able to install geospatial packages. Therefore, the docker image for Renjin on Fedora and Arch Linux are not pursued.
 
 ### FastR
+
+#### Debian
 
 There is a docker image for FastR 3.4.0 on Debian[@nustNuestFastrdocker2019]. But there is a problem on installing `sf` package (one of the core geospatial packages). The problem is related to `proj` not found although it's already installed [@CanNotInstall]. The next attempt is using the latest FastR release 3.6.0, by extending an example from [@CouldnBuildFastr]. Unfortunately, the problem still exists. To check whether this problem is FastR specific or not, GNU R is installed for both docker images and it's possible to install `sf` on it. This means, the problem is specific to FastR.
 
@@ -123,6 +116,16 @@ Although TERR is not free and open, TIBCO provides TERR for free with Developer 
 Another problem found is related to `rJava` package. An error message suggest to run `R CMD javareconf` for successful `rJava` installation. Unfortunately, this `javareconf` is not available in TERR.
 
 Since it is not possible to install R geospatial packages with Debian and Ubuntu, we do not continue the exploration for Fedora and Arch Linux.
+
+## Benchmark Tool (`altRnative`)
+
+A new R package name `altRnative` is created to provide functionalities to do benchmark for R script accross different docker image. `altRnative` uses `microbenchmark` for running the benchmark process and `stevedero` for managing the docker image and containers. This package is available in GitHub repository, in the following link: `https://github.com/ismailsunni/altRnative`. This package is tested to do benchmark on Spatial Data Science with R Book. Currently, only successful geospatial docker are supported in this package. Below is the list of functionalities of `altRnative`:
+
+1. Run R script inside a docker image
+2. Run benchmark for R script across docker image
+3. Create box plot from the benchmark result
+4. Create a ratio based the mean value to see the ratio between the benchmark result
+5. Create box plot from the benchmark ratio
 
 ## Benchmark {#benchmark}
 
