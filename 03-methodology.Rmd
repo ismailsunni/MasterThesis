@@ -1,20 +1,22 @@
 # Methodology {#methodology}
 
-In this chapter, the methodology of the research is explained. For better understanding, the methodology is shown as in \@ref(fig:methodology). From this big diagram, there are three main parts.
+In this chapter, the methodology of the research is explained. For better understanding, the methodology is shown as in \@ref(fig:methodology). From this diagram, there are nine blocks that are grouped into 3 main parts. The first part is **Docker Images** that covers _Various R implementations_, _Platform_, _Various R + Platform Docker Images_, _Spatial and SpatioTemporal R packages_ and _Geospatial R Docker Image_. From this first part, the answer to the first and second research questions can be found. The second part is **Benchmarking** which covers _Geospatial Workflow_ and _Benchmarking_ block. And the last one is _Analysis_ that contains _Failure Analysis_ and _Benchmark Analysis_. This third will answer the third and fourth research questions. As shown in figure \@ref(fig:methodology), there four numbers that represent the location where the answer to each research question. In the following sections, each part is explained in detail.
 
 ```{r methodology, echo=FALSE, fig.align='center', fig.cap='Methodology', out.width = "400px"}
-knitr::include_graphics('./figure/methodology.png')
+knitr::include_graphics('./figure/methodology.jpg')
 ```
 
 ## Docker Images
 
-The first step is creating Docker images for each combination of platform and R implementations. The research uses 6 R implementations (GNU-R, MRO, Renjin, FastR, pqR, and TERR) and 3 platforms (Debian, Fedora, and Arch Linux). It is possible to use another platform with the same package manager if it's found that there is already a working Docker image or there is a problem with current platform. This changes for example Ubuntu for Debian.
-
-After that, the system dependencies for geospatial R packages are installed. The list of dependencies are taken from [@RhubSysreqsdb2019] database. If there is uninstalled system dependencies or missing dependencies, they are noted and reported to the repository. The next step is installing all R packages in the Spatial and SpatioTemporal view by using CTV packages [@CTV] wherever possible. If it is not possible, installing one by one packages will be done. All failed installation will be tried to fix or noted if it is not possible to fix.
-
-In the end, there are 36 Docker images for all combination between platforms, R implementations, and geospatial R packages if all is done.
+The first step is creating Docker images for each combination of platform and R implementations without the geospatial R package. These Docker images (_Various R + Platform Docker Images_) are called Vanilla R Docker images for easier reference in this research. To create these Vanilla R Docker images, it needs to install the _Various R implementations_ on the _Platform_. The research uses 6 R implementations (GNU R, MRO, Renjin, FastR, pqR, and TERR). For the platforms, Debian, Fedora, and Arch Linux. The reasons for choosing these platforms have been mentioned in \@ref(linux-distribution). It is possible to use another platform with the same package manager if it's found that there is already a working Docker image or there is a problem with the current platform. These changes, for example, Ubuntu for Debian.
+ 
+There are other popular platforms like Windows and macOS. Windows platform is not chosen because of the requirement of its Docker image. Windows docker image can be run only from Windows host machine^[https://stackoverflow.com/questions/33190469/linux-machine-with-docker-deploy-windows-container/33190605#33190605]. MacOS is also not chosen because of its software license agreement^[https://www.apple.com/legal/sla/docs/macOSCatalina.pdf].
+ 
+To create the _Geospatial R Docker Image_, it needs to install geospatial R packages including their system dependencies. The list of dependencies is taken from [@RhubSysreqsdb2019] database. If there is an uninstalled system dependency or missing dependencies, they are noted and reported to the repository. _Spatial and SpatioTemporal R packages_ are the packages under Spatial and SpatioTemporal view. They will be installed by using CTV packages [@CTV] whenever possible. If it is not possible, installing one by one package will be done. All failed installations will be tried to fix or noted if it is not possible to fix it.
 
 ## Benchmarking
+
+
 
 An R package, altRnative[@sunniIsmailsunniAltRnative2019], is created to make the benchmarking process easier. This R package uses microbenchmark to handle the benchmarking process[@mersmannMicrobenchmarkAccurateTiming2019] and stevedore for the Docker client manipulation [@fitzjohnStevedoreDockerClient2019]. By using altRnative package, the benchmark between sucessful Docker image is done by running code inside the modified [@sunniIsmailsunniSdsr2019]the Spatial Data Science R book[@pebesmaEdzerSdsr2019]. The modification is needed since there is a part that needs large external data.
 

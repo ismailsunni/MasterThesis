@@ -31,7 +31,7 @@ pqR is another R implementation created by Radford Neal that compatibles with GN
 
 TERR is an enterprise-grade analytic engine created by TIBCO that has full compatibility with GNU-R. It can most common R packages without modification [@tibcoTIBCOEnterpriseRuntime2019]. There is not know Docker image for this R implementation.
 
-## Linux Distribution
+## Linux Distribution {#linux-distribution}
 
 From 10 major Linux distribution based on [@distrowatchDistroWatchComPut2019], Debian, Fedora, and Arch Linux are chosen for this research. Debian and Fedora are chosen because they are being used on CRAN and have different package managers. Arch Linux is chosen because it is a Linux distribution in different spectrum compared to Debian and Fedora [@distrowatchDistroWatchComPut2019]. Ubuntu is not chosen because it is built on Debian and is widely used in the GIS & R community (cf. UbuntuGIS).  Fedora represents the Fedora/RedHat/CentOS distributions [@danielmiesslerDifferenceFedoraRedhat2019].
 
