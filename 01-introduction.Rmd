@@ -15,7 +15,7 @@ A container is computer software that is used to package and run an application 
 ## Aim and Objective {#aim-objective}
 
 The main goal of this research is to understand what the performance of geospatial R packages in non-base R implementations and on platforms currently not supported by CRAN is. The behavior that we want to understand is installation and testing aspects of the R packages (i.e. whether an R package can be installed or not and whether the packages’ tests pass or not in the uncommon R implementations).
-One step to achieve this goal is creating docker image for all possible combination of R implementations and platform. The next step is testing the compatibilities of packages from spatial and spatial-temporal views on the containers from the docker image created previously. Lastly, based on the result of previous testing, the performance of successful combination is benchmarked in term of speed for typicial geospatial workflow.
+One step to achieve this goal is creating Docker image for all possible combination of R implementations and platform. The next step is testing the compatibilities of packages from spatial and spatial-temporal views on the containers from the Docker image created previously. Lastly, based on the result of previous testing, the performance of successful combination is benchmarked in term of speed for typicial geospatial workflow.
 
 ## Research Question
 

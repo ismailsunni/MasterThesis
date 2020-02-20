@@ -1,10 +1,10 @@
 # Discussion {#discussion}
 
-This chapter contains the discussion about the result from the research. It is divided into three parts. First, the common problems that is found when creating docker image for various R implementation and platform is compiled. The result of the benchmark is dicussed on the second part. The last part discuss about the limitation and the possible improvement of the research.
+This chapter contains the discussion about the result from the research. It is divided into three parts. First, the common problems that is found when creating Docker image for various R implementation and platform is compiled. The result of the benchmark is dicussed on the second part. The last part discuss about the limitation and the possible improvement of the research.
 
 ## Common Problems for R Implementations and Platform
 
-Based on the result in Chapter 4, the problem found when creating docker image for different R implementation on different platform can be grouped into three kind of problem. The first one is related to system dependencies, second is related to unsupported implementation, and the last one is about error or problem in running time. Example of each common problem can be seen in table \@ref(tab:commonProblemTable). Below for each common problem is discussed.
+Based on the result in Chapter 4, the problem found when creating Docker image for different R implementation on different platform can be grouped into three kind of problem. The first one is related to system dependencies, second is related to unsupported implementation, and the last one is about error or problem in running time. Example of each common problem can be seen in table \@ref(tab:commonProblemTable). Below for each common problem is discussed.
 
 
 ```{r commonProblemTable, results="asis", echo=FALSE}
@@ -38,7 +38,7 @@ commonProblem %>%
 
 ### System Dependencies
 
-In this research, system dependencies are taken from sysreqsdb which provide list of system dependencies for each R package based on the metadata. This database is almost complete, there is only two outdated system dependencies for Fedora 32 as shown in table \@ref(tab:sysreqsdbUpdate). Some docker image needs to install another system dependencies that are not available in the base image for example `gfortran`, `sqlite`, and `sqlite-devel`. But in this case it's more on that the system dependencies are not mentioned in the R packages. This kind of errors are relatively easy to solve for example by checking the new name of the package and try to install it again.
+In this research, system dependencies are taken from sysreqsdb which provide list of system dependencies for each R package based on the metadata. This database is almost complete, there is only two outdated system dependencies for Fedora 32 as shown in table \@ref(tab:sysreqsdbUpdate). Some Docker image needs to install another system dependencies that are not available in the base image for example `gfortran`, `sqlite`, and `sqlite-devel`. But in this case it's more on that the system dependencies are not mentioned in the R packages. This kind of errors are relatively easy to solve for example by checking the new name of the package and try to install it again.
 
 ```{r sysreqsdbUpdate, results="asis", echo=FALSE}
 differenceSysReqsDB = data.frame(
@@ -79,14 +79,14 @@ The benchmark result from the experiment is quite clear as previously mentioned 
 
 ### Docker Images Creation
 
-Docker image creation takes long time especially if there is limited information or stumbled on a problem. There are some possible fixes that can be done to create more geospatial docker images.
+Docker image creation takes long time especially if there is limited information or stumbled on a problem. There are some possible fixes that can be done to create more geospatial Docker images.
 
 1. Downgrade packages in Arch Linux so that it can use GDAL 2.x to support installation of MRO 3.5.3. Due to time limitatio and last minute knowledge about unofficial MRO package on AUR[@AURMicrosoftropen], this solution has not been checked.
-2. Create docker image based on Fedora 30 or 32 to install FastR 3.6.1 for an updated packages support. This research has only done FastR on Oracle Linux 7.
-3. Create docker image for Windows to explore the compatibility of geospatial packages and get more performance comparison.  
+2. Create Docker image based on Fedora 30 or 32 to install FastR 3.6.1 for an updated packages support. This research has only done FastR on Oracle Linux 7.
+3. Create Docker image for Windows to explore the compatibility of geospatial packages and get more performance comparison.  
 
 ### Benchmarking Tool
 
-The altRnative package has shown its capability to perform benchmark accross multiple R implementation and platform. But there are some areas that can improved to get better result. Adding a feature to run benchmark from existing docker container or custom docker image will make it more flexibility to setup the benchmark process. This feature will also unlock the possibility to run benchmark not only for geospatial R workflow or non R script. In this case, altRnative will be a universal benchmarking tool.
+The altRnative package has shown its capability to perform benchmark accross multiple R implementation and platform. But there are some areas that can improved to get better result. Adding a feature to run benchmark from existing Docker container or custom Docker image will make it more flexibility to setup the benchmark process. This feature will also unlock the possibility to run benchmark not only for geospatial R workflow or non R script. In this case, altRnative will be a universal benchmarking tool.
 
 Another improvement is adding profiling feature to know which part of the code that spend the most of the time. There is already an R package for profiling [@ProfvisInteractiveVisualizations]. altRnative can use this R package to get the profiling tool, just like it uses microbenchmark to do the benchmarking.

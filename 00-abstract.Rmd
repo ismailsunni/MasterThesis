@@ -7,4 +7,4 @@ A benchmarking R package called `altRnative` is created to run the benchmarking 
 Reproducibility self-assessment (https://osf.io/j97zp/): 3, 3, 3, 3, 3 (input data, preprocessing, methods, computational environment, results)
 
 
-**Keywords**: R implementation, benchmark, system dependencies, docker, sysreqsdb
+**Keywords**: R implementation, benchmark, system dependencies, Docker, sysreqsdb

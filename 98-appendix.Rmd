@@ -11,8 +11,8 @@ If you feel it necessary to include an appendix, it goes here.
 
 This appendix contains links to the source code that is used for this research.
 
-1. The R package to run you R code in different R implementations and platforms on a docker container: [altRnative](https://github.com/ismailsunni/altRnative)
-2. A collection of docker image of various R implementations on various platform both vanilla and with geospatial R packages: [dockeRs](https://github.com/ismailsunni/dockeRs)
+1. The R package to run you R code in different R implementations and platforms on a Docker container: [altRnative](https://github.com/ismailsunni/altRnative)
+2. A collection of Docker image of various R implementations on various platform both vanilla and with geospatial R packages: [dockeRs](https://github.com/ismailsunni/dockeRs)
 3. This master thesis writing: [master-thesis](https://github.com/ismailsunni/master-thesis)
 
 # SDSR Benchmark per Chapter {#apendix-benchmark-per-chapter}

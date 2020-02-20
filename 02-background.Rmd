@@ -11,24 +11,24 @@ The main implementation of R programing language is developed by the R Core Team
 
 ### Microsoft R Open
 
-Microsoft Open R (MRO) is created by Microsoft Corporation which has additional capabilities for better performance, reproducibility, and platform support. The latest release (MRO 3.5.3) is based on GNU-R 3.5.3. It has the compatibility with all all packages that compatible with GNU-R 3.5.3[@microsoftMicrosoftOpenEnhanced2019]. There are some docker image available for example by [@nustNuestMrodocker2019] based on Ubuntu 18.04 and [@lisicJlisicRdockercentos2017] based on CentOS 7.
+Microsoft Open R (MRO) is created by Microsoft Corporation which has additional capabilities for better performance, reproducibility, and platform support. The latest release (MRO 3.5.3) is based on GNU-R 3.5.3. It has the compatibility with all all packages that compatible with GNU-R 3.5.3[@microsoftMicrosoftOpenEnhanced2019]. There are some Docker image available for example by [@nustNuestMrodocker2019] based on Ubuntu 18.04 and [@lisicJlisicRdockercentos2017] based on CentOS 7.
 
 ### Renjin
 
 Renjin is a JVM-based intepreter for the GNU-R. It is developed by BeDataDriven. Its main features are seamless integration between Java and R, big data processing, better performance on some operations, easiness to deploy in cloud infrastructure [@bebetadrivenRenjinJVMbasedInterpreter2019]. There are list of R packages in [@bedatadrivenRenjinOrgPackages2019] that show its compatibility and why it does not compatible. It shows that many geospatial R package are not compatible with Renjin.
-There is a docker image available for Renjin [@nustNuestRenjindockerDockerfiles2019].
+There is a Docker image available for Renjin [@nustNuestRenjindockerDockerfiles2019].
 
 ### FastR
 
-FastR is R implementation by Oracle that aims a high-performance [@oracleReferenceManual2019]. It is built on GraalVM, a universal virtual machine to run applications created by many programming language [@oracleGraalVM2019]. There is a docker image available for FastR [@nustNuestFastrdocker2019].
+FastR is R implementation by Oracle that aims a high-performance [@oracleReferenceManual2019]. It is built on GraalVM, a universal virtual machine to run applications created by many programming language [@oracleGraalVM2019]. There is a Docker image available for FastR [@nustNuestFastrdocker2019].
 
 ### pqR
 
-pqR is another R implementation created by Radford Neal that compatibles with GNU-R 2.15.1. It claims to improve GNU-R in term of speeding up many functions and perform some numerical computation in paralel on multi-core processor [@m.nealPqRPrettyQuick2019]. There is a docker image available for pqR [@nustNuestPqrdocker2019].
+pqR is another R implementation created by Radford Neal that compatibles with GNU-R 2.15.1. It claims to improve GNU-R in term of speeding up many functions and perform some numerical computation in paralel on multi-core processor [@m.nealPqRPrettyQuick2019]. There is a Docker image available for pqR [@nustNuestPqrdocker2019].
 
 ### TIBCO Enterprise Runtime for R (TERR)
 
-TERR is enterprise-grade analytic engine creted by TIBCO that has full compatibility with GNU-R. It can most common R packages without modification [@tibcoTIBCOEnterpriseRuntime2019]. There is not know docker image for this R implementation.
+TERR is enterprise-grade analytic engine creted by TIBCO that has full compatibility with GNU-R. It can most common R packages without modification [@tibcoTIBCOEnterpriseRuntime2019]. There is not know Docker image for this R implementation.
 
 ## Linux Distribution
 
