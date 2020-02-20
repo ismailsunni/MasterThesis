@@ -16,11 +16,9 @@ To create the _Geospatial R Docker Image_, it needs to install geospatial R pack
 
 ## Benchmarking
 
-
-
-An R package, altRnative[@sunniIsmailsunniAltRnative2019], is created to make the benchmarking process easier. This R package uses microbenchmark to handle the benchmarking process[@mersmannMicrobenchmarkAccurateTiming2019] and stevedore for the Docker client manipulation [@fitzjohnStevedoreDockerClient2019]. By using altRnative package, the benchmark between sucessful Docker image is done by running code inside the modified [@sunniIsmailsunniSdsr2019]the Spatial Data Science R book[@pebesmaEdzerSdsr2019]. The modification is needed since there is a part that needs large external data.
-
-The benchmark process is run on XPS 9360 laptop with core i7 8th gen processor, 16 GB RAM, and SSD. Any other unneeded application beside the benchmarking is killed so that they wouldn't disturb the benchmarking process.
+Since there is no available tool to run a benchmark for R across different platforms, the tool needs to be created first. The idea is to create an R package that able to run R script inside a Docker container. It can be done by utilizing the `stevedore` R package. `stevedore` is an R package that can be used for Docker client manipulation[@fitzjohnStevedoreDockerClient2019]. For the benchmark part, `microbenchmark` can be used to handle the benchmarking process [@mersmannMicrobenchmarkAccurateTiming2019]. `microbenchmark` also offers nice plotting functionality that can be used for easier analysis. `microbenchmark` only gives the raw value of elapsed time. For a better view of the performance comparison, an additional feature to get the ratio of the elapsed time is needed. This feature will be implemented also as well as the plot for the elapsed time ratio.
+ 
+For the benchmark use case, the Spatial Data Science R (SDSR) book [@pebesmaEdzerSdsr2019] as the _Geospatial Workflow_. The idea is running all of the code inside the SDSR book as it represents a common geospatial workflow. Modification of the book can be done if there is an error or complicated prerequisite (e.g. downloading the additional package, downloading large data). The benchmark process is run on Dell XPS 9360 laptop with Intel® Core™ i7-8550U CPU @ 1.80GHz × 8 processor, 16 GB of RAM, and 512 GB of SSD. It runs Ubuntu 18.04. Any other unneeded application beside the benchmarking is killed so that they would not disturb the benchmarking process.
 
 ## Analysis
 
