@@ -34,6 +34,7 @@
 
 % Added by CII
 \usepackage{ifxetex,ifluatex}
+\usepackage{fontawesome}
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
@@ -205,8 +206,16 @@
 \def\@thedivisionof{The Division of}
 \def\approvedforthe#1{\gdef \@approvedforthe{#1}}
 \def\@approvedforthe{Division}
+
+\def\email#1{\gdef \@email{#1}}
+\def\@email{\@latex@warning@no@line{No \noexpand\email given}}
+
+\def\website#1{\gdef \@website{#1}}
+\def\@website{\@latex@warning@no@line{No \noexpand\website given}}
+
 \def\advisor#1{\gdef \@advisor{#1}}
 \def\@advisor{\@latex@warning@no@line{No \noexpand\advisor given}}
+
 \def\altadvisor#1{\gdef \@altadvisor{#1} \@altadvisortrue}
 \global\let\@altadvisor\@empty
 \newif\if@altadvisor
@@ -304,31 +313,34 @@
   \begin{center}
     \setcounter{page}{1}
     \null\vfil
-    {\fontsize{12}{14}\selectfont \@title}
-    \vfil
+    {\fontsize{12}{14}\selectfont \bf \LARGE \@title} \par
+    {\it Thesis submitted in partial fulfillment of the requirements} \\
+    {\it for the Degree of Master of Science in Geospatial Technologies} \par
+    {\bf \@date}
+    \
+    \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
+    \par
+    \par
+    {\bf \@author } \\
+    {\faEnvelope} \quad imajimatika@gmail.com \\
+    {\faGithub} \quad https://github.com/ismailsunni \par
+    {\bf Supervised by:} \\
+    \@advisor \\
+    Institute for Geoinformatics \\
+    University of Münster \par
+    {\bf Co-supervised by:} \\
+    \@altadvisor \\
+    Institute for Geoinformatics \\
+    University of Münster \par
+    {\bf Co-supervised by:} \\
+    \@secondaltadvisor \\
+    Information Management School \\
+    Universidade Nova de Lisboa \par
+    \par
+    \par
     \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
     \vfil
-    A Thesis \\
-    Presented to \\
-    \@thedivisionof \ \@division \\
-    \@institution
-    \vfil
-    \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
-    \vfil
-    In Partial Fulfillment \\
-    of the Requirements for the Degree \\
-    \@degree
-    \vfil
-    \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
-    \bigskip
-    \centerline{}
-    \bigskip
-    {\fontsize{12}{14}\selectfont \lineskip .75em
-    \begin{tabular}[t]{c}%
-      \@author
-    \end{tabular}\par}
-    \vskip 1.5em
-    {\fontsize{12}{14}\selectfont \@date \par}
+    \includegraphics[width=0.8\textwidth]{figure/logos.png}
   \end{center}\par
   \end{titlepage}
 
