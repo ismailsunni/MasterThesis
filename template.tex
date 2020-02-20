@@ -76,6 +76,8 @@ $endif$
 % To pass between YAML and LaTeX the dollar signs are added by CII
 \title{$title$}
 \author{$author$}
+\email{$email$}
+\website{$website$}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
 \date{$date$}
 \division{$division$}
@@ -84,11 +86,21 @@ $endif$
 \degree{$degree$}
 %If you have two advisors for some reason, you can use the following
 % Uncommented out by CII
+
+% First Alt Advisor / Second supervisor %
 $if(altadvisor)$
 \altadvisor{$altadvisor$}
 $endif$
+
+% Second Alt Advisor / Second supervisor %
 $if(secondaltadvisor)$
 \secondaltadvisor{$secondaltadvisor$}
+$endif$
+$if(secondaltinstitution)$
+\secondaltinstitution{$secondaltinstitution$}
+$endif$
+$if(secondaltdivision)$
+\secondaltdivision{$secondaltdivision$}
 $endif$
 % End of CII addition
 

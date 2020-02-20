@@ -1,19 +1,23 @@
 ---
 author: 'Ismail Sunni'
+email: 'imajimatika@gmail.com'
+website: 'https://github.com/ismailsunni'
+
 date: 'February 2020'
 institution: 'University of Muenster'
 division: 'Institute for Geoinformatics'
+
 advisor: 'Edzer Pebesma'
 # If you have more two advisors, un-silence line 7
 altadvisor: 'Daniel Nüst'
-secondaltadvisor: 'Roberto Henriques'
-department: 'Geosciences'
-degree: 'Master in Geospatial Technologies'
-title: 'Testing Geospatial R Packages on Implementations of the R Language and Platforms'
 
-# Author (does not work for some reasons)
-email: 'imajimatika@gmail.com'
-website: 'https://github.com/ismailsunni'
+secondaltadvisor: 'Roberto Henriques'
+secondaltinstitution: 'Universidade Nova de Lisboa'
+secondaltdivision: 'Information Management School'
+
+department: 'Geosciences'
+degree: 'Master of Science in Geospatial Technologies'
+title: 'Testing Geospatial R Packages on Implementations of the R Language and Platforms'
 
 knit: "bookdown::render_book"
 site: bookdown::bookdown_site

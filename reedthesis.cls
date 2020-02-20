@@ -226,6 +226,13 @@
 \newif\if@secondaltadvisor
 \@secondaltadvisorfalse
 
+% Can have better format
+\def\secondaltinstitution#1{\gdef \@secondaltinstitution{#1}}
+\def\@secondaltinstitution{\@latex@warning@no@line{No \noexpand\secondaltinstitution given}}
+
+\def\secondaltdivision#1{\gdef \@secondaltdivision{#1}}
+\def\@secondaltdivision{\@latex@warning@no@line{No \noexpand\secondaltdivision given}}
+
 \renewcommand\l@chapter[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
@@ -315,27 +322,27 @@
     \null\vfil
     {\fontsize{12}{14}\selectfont \bf \LARGE \@title} \par
     {\it Thesis submitted in partial fulfillment of the requirements} \\
-    {\it for the Degree of Master of Science in Geospatial Technologies} \par
+    {\it for the Degree of \@degree }\par
     {\bf \@date}
     \
     \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
     \par
     \par
     {\bf \@author } \\
-    {\faEnvelope} \quad imajimatika@gmail.com \\
-    {\faGithub} \quad https://github.com/ismailsunni \par
+    {\faEnvelope} \quad \@email \\
+    {\faGithub} \quad \@website \par
     {\bf Supervised by:} \\
     \@advisor \\
-    Institute for Geoinformatics \\
-    University of Münster \par
+    \@division \\
+    \@institution \par
     {\bf Co-supervised by:} \\
     \@altadvisor \\
-    Institute for Geoinformatics \\
-    University of Münster \par
+    \@division \\
+    \@institution \par
     {\bf Co-supervised by:} \\
     \@secondaltadvisor \\
-    Information Management School \\
-    Universidade Nova de Lisboa \par
+    \@secondaltdivision \\
+    \@secondaltinstitution \\ \par
     \par
     \par
     \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
