@@ -1,43 +1,44 @@
 # Background {#background}
 
-In this chapter, various R implementations, Linux distiribution, container technology, and benchmarking in R is explained.
+In this chapter, various R implementations, Linux distributions, container technology, and benchmarking in R is explained.
 
 ## R Implementations
 
 In this part, various known alternative R implementations are introduced in brief.
 
 ### GNU-R
-The main implementation of R programing language is developed by the R Core Team and belongs to the GNU project. The two latest release minor release are 3.5.x and 3.6.x [@FAQR]. To avoid confussion, in this thesis the main implementation is called by GNU-R.
+
+The main implementation of R programing language is developed by the R Core Team and belongs to the GNU project. The two latest release minor releases are 3.5.x and 3.6.x [@FAQR]. To avoid confusion, in this thesis the main implementation is called by GNU R.
 
 ### Microsoft R Open
 
-Microsoft Open R (MRO) is created by Microsoft Corporation which has additional capabilities for better performance, reproducibility, and platform support. The latest release (MRO 3.5.3) is based on GNU-R 3.5.3. It has the compatibility with all all packages that compatible with GNU-R 3.5.3[@microsoftMicrosoftOpenEnhanced2019]. There are some Docker image available for example by [@nustNuestMrodocker2019] based on Ubuntu 18.04 and [@lisicJlisicRdockercentos2017] based on CentOS 7.
+Microsoft Open R (MRO) is created by Microsoft Corporation which has additional capabilities for better performance, reproducibility, and platform support. The latest release (MRO 3.5.3) is based on GNU-R 3.5.3. It has compatibility with all packages that compatible with GNU-R 3.5.3[@microsoftMicrosoftOpenEnhanced2019]. There are some Docker images available for example by [@nustNuestMrodocker2019] based on Ubuntu 18.04 and [@lisicJlisicRdockercentos2017] based on CentOS 7.
 
 ### Renjin
 
-Renjin is a JVM-based intepreter for the GNU-R. It is developed by BeDataDriven. Its main features are seamless integration between Java and R, big data processing, better performance on some operations, easiness to deploy in cloud infrastructure [@bebetadrivenRenjinJVMbasedInterpreter2019]. There are list of R packages in [@bedatadrivenRenjinOrgPackages2019] that show its compatibility and why it does not compatible. It shows that many geospatial R package are not compatible with Renjin.
+Renjin is a JVM-based interpreter for the GNU-R. It is developed by BeDataDriven. Its main features are seamless integration between Java and R, big data processing, better performance on some operations, easiness to deploy in cloud infrastructure [@bebetadrivenRenjinJVMbasedInterpreter2019]. There is a list of R packages in [@bedatadrivenRenjinOrgPackages2019] that show its compatibility and why it does not compatible. It shows that many geospatial R packages are not compatible with Renjin.
 There is a Docker image available for Renjin [@nustNuestRenjindockerDockerfiles2019].
 
 ### FastR
 
-FastR is R implementation by Oracle that aims a high-performance [@oracleReferenceManual2019]. It is built on GraalVM, a universal virtual machine to run applications created by many programming language [@oracleGraalVM2019]. There is a Docker image available for FastR [@nustNuestFastrdocker2019].
+FastR is R implementation by Oracle that aims at a high-performance [@oracleReferenceManual2019]. It is built on GraalVM, a universal virtual machine to run applications created by many programming languages [@oracleGraalVM2019]. There is a Docker image available for FastR [@nustNuestFastrdocker2019].
 
 ### pqR
 
-pqR is another R implementation created by Radford Neal that compatibles with GNU-R 2.15.1. It claims to improve GNU-R in term of speeding up many functions and perform some numerical computation in paralel on multi-core processor [@m.nealPqRPrettyQuick2019]. There is a Docker image available for pqR [@nustNuestPqrdocker2019].
+pqR is another R implementation created by Radford Neal that compatibles with GNU-R 2.15.1. It claims to improve GNU-R in terms of speeding up many functions and perform some numerical computation in parallel on a multi-core processor [@m.nealPqRPrettyQuick2019]. There is a Docker image available for pqR [@nustNuestPqrdocker2019].
 
 ### TIBCO Enterprise Runtime for R (TERR)
 
-TERR is enterprise-grade analytic engine creted by TIBCO that has full compatibility with GNU-R. It can most common R packages without modification [@tibcoTIBCOEnterpriseRuntime2019]. There is not know Docker image for this R implementation.
+TERR is an enterprise-grade analytic engine created by TIBCO that has full compatibility with GNU-R. It can most common R packages without modification [@tibcoTIBCOEnterpriseRuntime2019]. There is not know Docker image for this R implementation.
 
 ## Linux Distribution
 
-From 10 major Linux distribution based on [@distrowatchDistroWatchComPut2019], Debian, Fedora, and Arch Linux are choosen for this research. Debian and Fedora are chosen because they are being used on CRAN and have different package managers. Arch Linux is chosen because it is a linux distribution in different spectrum compared to Debian and Fedora [@distrowatchDistroWatchComPut2019]. Ubuntu is not chosen because it is built on Debian and is widely used in the GIS & R community (cf. UbuntuGIS).  Fedora represents the Fedora/RedHat/CentOS distributions [@danielmiesslerDifferenceFedoraRedhat2019].
+From 10 major Linux distribution based on [@distrowatchDistroWatchComPut2019], Debian, Fedora, and Arch Linux are chosen for this research. Debian and Fedora are chosen because they are being used on CRAN and have different package managers. Arch Linux is chosen because it is a Linux distribution in different spectrum compared to Debian and Fedora [@distrowatchDistroWatchComPut2019]. Ubuntu is not chosen because it is built on Debian and is widely used in the GIS & R community (cf. UbuntuGIS).  Fedora represents the Fedora/RedHat/CentOS distributions [@danielmiesslerDifferenceFedoraRedhat2019].
 
 ## Container
 
-A container is computer software that is used to package and run an application and all of its dependencies [@dockerWhatContainer2019]. Since it is isolated from the external system, users can set up anything that is needed and run even complex software environments on another computer easily. This ability enables the developer to create different computational environments to run a specific software. In testing, it is very useful since you can have a well-defined configuration, especially if you need specific versions dependencies [@manuelweissHowDockerMakes2016]. An R package called `stevedore` can be used to work with container by using the Docker API [@fitzjohnStevedoreDockerClient2019].
+A container is computer software that is used to package and run an application and all of its dependencies [@dockerWhatContainer2019]. Since it is isolated from the external system, users can set up anything that is needed and run even complex software environments on another computer easily. This ability enables the developer to create different computational environments to run specific software. In testing, it is very useful since you can have a well-defined configuration, especially if you need specific versions dependencies [@manuelweissHowDockerMakes2016]. An R package called `stevedore` can be used to work with the container by using the Docker API [@fitzjohnStevedoreDockerClient2019].
 
 ## Benchmarking in R
 
-There are already several benchmarking R package for R lie using `microbenchmark`, `rbenchmark`, `tictoc`, and `bench` [@gossmannWaysMeasureRunning2017]. Those package measure the duration of running an R script or expression. Unfortunately, those packages do not support running benchmark for different R implementation and platform easily.
+There are already several benchmarking R package for R like using `microbenchmark`, `rbenchmark`, `tictoc`, and `bench` [@gossmannWaysMeasureRunning2017]. Those packages measure the duration of running an R script or expression. Unfortunately, those packages do not support running the benchmark for different R implementation and platform easily.
