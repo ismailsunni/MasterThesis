@@ -34,8 +34,8 @@ abstract: |
 # like below, use a command like that for the abstract above.  Note that a tab is 
 # needed on the line after the `|`.
 acknowledgements: |
-dedication: |
   `r if(knitr:::is_latex_output()) paste(readLines("00--prelim.Rmd"), collapse = '\n  ')`
+dedication: |
 preface: |
 # Specify the location of the bibliography below
 bibliography: bib/thesis.bib
