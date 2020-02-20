@@ -119,13 +119,25 @@ Since it is not possible to install R geospatial packages with Debian and Ubuntu
 
 ## Benchmark Tool (`altRnative`)
 
-A new R package name `altRnative` is created to provide functionalities to do benchmark for R script accross different docker image. `altRnative` uses `microbenchmark` for running the benchmark process and `stevedero` for managing the docker image and containers. This package is available in GitHub repository, in the following link: `https://github.com/ismailsunni/altRnative`. This package is tested to do benchmark on Spatial Data Science with R Book. Currently, only successful geospatial docker are supported in this package. Below is the list of functionalities of `altRnative`:
+A new R package name `altRnative` is created to provide functionalities to do benchmark for R script accross different docker image. `altRnative` uses `microbenchmark` for running the benchmark process and `stevedero` for managing the docker image and containers. This package is available in GitHub repository, in the following link: `https://github.com/ismailsunni/altRnative`. This package is tested to do benchmark on Spatial Data Science with R Book. To run a benchmark, an R script is needed as the input, and also the list of combination between platform and R implementation.
 
-1. Run R script inside a docker image
-2. Run benchmark for R script across docker image
-3. Create box plot from the benchmark result
-4. Create a ratio based the mean value to see the ratio between the benchmark result
-5. Create box plot from the benchmark ratio
+```{R sdsr_code_benchmark, eval=FALSE}
+code = expression(
+  setwd('/home/docker/sdsr'), 
+  bookdown::clean_book(TRUE), 
+  unlink('_book/', recursive=TRUE), 
+  unlink('_bookdown_files', recursive=TRUE), 
+  bookdown::render_book('index.Rmd', 'bookdown::gitbook')
+  )
+
+sdsr_result = benchmarks_code(
+  code = code, 
+  platforms = c('debian', 'ubuntu', 'fedora', 'archlinux'),
+  r_implementations = c('gnu-r', 'mro'), 
+  volumes = '/home/ismailsunni/dev/r/sdsr:/home/docker/sdsr', 
+  times = 3
+  )
+```
 
 ## Benchmark {#benchmark}
 
@@ -153,7 +165,7 @@ summaryTableBaseline <- baseline_benchmark %>%
                 )
 ```
 
-```{r summaryTableBaseline, results='asis', echo=FALSE, results='hold'}
+```{r summaryTableBaseline, echo=FALSE, results='hold'}
 summaryTableBaseline %>%
   kable(
     "latex",
