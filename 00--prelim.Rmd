@@ -1,22 +1,4 @@
-# Declaration of Academic Integrity {-}
-
-I hereby confirm that this thesis on *Testing Geospatial R Packages on Implementations of the R Language and Platforms* is solely my own work and that I have used no sources or aids other than
-the ones stated. All passages in my thesis for which other sources, including electronic media,
-have been used, be it direct quotes or content references, have been acknowledged as such and
-the sources cited.
-
-24 February 2020
-
-\newline
-\newline
-I agree to have my thesis checked in order to rule out potential similarities with other works and
-to have my thesis stored in a database for this purpose.
-
-24 February 2020
-
-
-
-# Acknowledgements {-}
+# Dedications {-}
 
 I want to thank a few people. To be added later.
 

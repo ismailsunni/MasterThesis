@@ -333,24 +333,35 @@
   \end{titlepage}
 
 %% Approved for the division page
+%% Taken from Luuk's thesis (https://github.com/luukvdmeer/msc-thesis/blob/master/Document/index/reedthesis.cls)
   \cleardoublepage
-  {\fontsize{12}{14}
-  \setbox0=\hbox{Approved for the \@approvedforthe}
+  {\fontsize{12}{12}
+  \chapter*{Declaration of Academic Integrity}
   \thispagestyle{empty}
   \null\vfil		% just below center of page
-  \par\vskip 6cm	% below center, not center
+  I hereby confirm that this thesis on \textit{\@title} is solely my own work and that I have used no sources or aids other than the ones stated. \par
+  All passages in my thesis for which other sources, including electronic media, have been used, be it direct quotes or content references, have been acknowledged as such and the sources cited.
+  \par\vskip 1cm	% below center, not center
+  \today
   \centerline{\copy0}	% approved
-  \centerline{(\@department)} %major
-  \vskip 1cm		%space to sign
-  \centerline{\makebox[\wd0][c]{\hrulefill}
-	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\hrulefill} \fi
-	\if@secondaltadvisor \makebox[.5in]{} \makebox[\wd0][c]{\hrulefill} \fi}
-  \centerline{\makebox[\wd0][c]{\@advisor}
-	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\@altadvisor} \fi
-	\if@secondaltadvisor \makebox[.5in]{} \makebox[\wd0][c]{\@secondaltadvisor} \fi
-	}
+%%  \centerline{(\@department)} %major
+  \vskip 2cm		%space to sign
+  \rule{4cm}{0.4pt}
+  \par\vskip 2cm
+  I agree to have my thesis checked in order to rule out potential similarities with other works and to have my thesis stored in a database for this purpose.
+  \par\vskip 1cm	% below center, not center
+  \today
+  \centerline{\copy0}	% approved
+  \vskip 2cm		%space to sign
+  \rule{4cm}{0.4pt}
+%%  \centerline{\makebox[\wd0][c]{\hrulefill}
+%%	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\hrulefill} \fi}
+%%  \centerline{\makebox[\wd0][c]{\@advisor}
+%%	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\@altadvisor} \fi}
   \par\vfil\null}
-  \cleardoublepage
+  % \cleardoublepage
+  % \shipout\null
+  % \stepcounter{page}
   }
 }
 
