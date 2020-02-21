@@ -90,7 +90,17 @@ There is a possibility to downgrade the installed GDAL version to match with the
 
 ### Renjin
 
-Renjin Docker image for Debian is available[@nustNuestRenjindockerDockerfiles2019]. Unfortunately, Renjin doesn't support `sf` [@RenjinOrgSf] because Renjin does not support `units` package [@RenjinOrgUnits] which is needed by `sf`. `units` package is not installed even though `udunits2` is available because Renjin does not support packages that depends on external libraries, in this case `udunits2`[@RccpNotFound]. By the same reasons, Fedora and Arch Linux will not be able to install geospatial packages. Therefore, the Docker image for Renjin on Fedora and Arch Linux are not pursued.
+#### Debian
+
+Renjin Docker image for Debian is available [@nustNuestRenjindockerDockerfiles2019]. Unfortunately, Renjin doesn't support `sf` [@RenjinOrgSf] because Renjin does not support `units` package [@RenjinOrgUnits] which is needed by `sf`. `units` package is not installed even though `udunits2` is available because Renjin does not support packages that depend on external libraries, in this case, `udunits2`^[https://stackoverflow.com/questions/58996151/rccp-h-not-found-in-renjin-when-compiling-package/59017512]. In the end, the Docker image for Renjin on Debian is created but its geospatial version can not be created.
+ 
+#### Fedora
+ 
+Since it is not possible to install geospatial packages on Renjin on Debian, the same situation applies for Renjin on Fedora. Because of this reason, the Docker image for Renjin on Fedora is not created and marked as _stop_ in the final result.
+ 
+#### Arch Linux
+ 
+Since it is not possible to install geospatial packages on Renjin on Debian, the same situation applies for Renjin on Arch Linux. Because of this reason, the Docker image for Renjin on Arch Linux is not created and marked as _stop_ in the final result.
 
 ### FastR
 
