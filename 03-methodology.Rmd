@@ -22,12 +22,6 @@ For the benchmark use case, the Spatial Data Science R (SDSR) book [@pebesmaEdze
 
 ## Analysis
 
-Based on the first two part result, analysis is done. There is one analysis for each result.
-
-### Failure Analysis
-
-In the process of Docker image creation including R installation, system dependencies installation, and R package installation it is expected that there will be a problem or an error in the process. Theses problems is tried to be solved as part of the methodology. Some problems can fixed and some others can not be done in the time of this research. All those problem will be grouped by the charactheristic and then it can be seen what's the most common one.
-
-### Benchmark Analysis
-
-The result of the benchmark will be analysed. Depending on the result, it will be checked what is the reason if there is a slower or faster combination in the bencmark.
+The last part is _Analysis_ based on the result of the previous two parts. The first one is _Failure Analysis_ which tries to analyze why a problem or an error occurs in the process of Docker image creation. This analysis covers the various R implementations installation, system dependencies installation, geospatial R package installation, and running the geospatial workflow. Some problems may be easily fixable, while others can only be fixed with a lot of work. An example problem that can only be fixed with a lot of work is the problem related to the R implementation itself or related to packages availability on a specific platform or R version. The general rule is if it's fixable within the research time frame, it will be tried to fix otherwise it will be marked as not fixable. All the problems and the fixes will be reported to their maintainer and discussed in the next chapter.
+ 
+The second analysis is _Benchmark Analysis_ which will cover the result of the benchmark. From the result, it can be analyzed what is the main factor for the performance in the case of the SDSR book. More detail analysis can be done also to see which chapter of the book that takes the most of the running time.
