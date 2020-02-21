@@ -106,7 +106,7 @@ Since it is not possible to install geospatial packages on Renjin on Debian, the
 
 #### Debian
 
-There is a Docker image for FastR 3.4.0 on Debian[@nustNuestFastrdocker2019]. But there is a problem with installing the `sf` package (one of the core geospatial packages). The problem is related to `proj` not found although it's already installed [@CanNotInstall]. The next attempt is using the latest FastR release 3.6.0, by extending an example from [@CouldnBuildFastr]. Unfortunately, the same problem still exists. To check whether this problem is FastR specific or not, GNU R is installed for both Docker images and it's possible to install `sf` on it. This means the problem is specific to FastR. In parallel, a Docker image for FastR on Fedora is tried to create, but it is not possible. A more detail explanation is shown in the Fedora part below. In the end, it is possible to create a Docker image for FastR on Debian but it is not possible to create its geospatial version on Debian.
+There is a Docker image for FastR 3.4.0 on Debian[@nustNuestFastrdocker2019]. But there is a problem with installing the `sf` package (one of the core geospatial packages). The problem is related to `proj` not found although it's already installed ^[https://github.com/oracle/fastr/issues/116]. The next attempt is using the latest FastR release 3.6.0, by extending an example from ^[https://github.com/graalvm/examples/issues/6]. Unfortunately, the same problem still exists. To check whether this problem is FastR specific or not, GNU R is installed for both Docker images and it's possible to install `sf` on it. This means the problem is specific to FastR. In parallel, a Docker image for FastR on Fedora is tried to create, but it is not possible. A more detail explanation is shown in the Fedora part below. In the end, it is possible to create a Docker image for FastR on Debian but it is not possible to create its geospatial version on Debian.
  
 #### Fedora
  
@@ -151,9 +151,12 @@ Since it is not possible to install geospatial packages on TERR on Debian, the s
 
 Since it is not possible to install geospatial packages on TERR on Debian, the same situation applies for TERR on Arch Linux. Because of this reason, the Docker image for TERR on Arch Linux is not created and marked as _stop_ in the final result.
 
-## Benchmark Tool (`altRnative`)
+## Benchmark {#benchmark}
 
-A new R package name `altRnative` is created to provide functionalities to do benchmark for R script accross different Docker image. `altRnative` uses `microbenchmark` for running the benchmark process and `stevedero` for managing the Docker image and containers. This package is available in GitHub repository, in the following link: `https://github.com/ismailsunni/altRnative`. This package is tested to do benchmark on Spatial Data Science with R Book. To run a benchmark, an R script is needed as the input, and also the list of combination between platform and R implementation.
+### Benchmark Tool (`altRnative`)
+
+A new R package name `altRnative` is created to provide functionalities to do benchmark for R script across different Docker image [@altRnative2020]. `altRnative` uses `microbenchmark` for running the benchmark process and `stevedore` for managing the Docker image and containers. This package is available in the GitHub repository, in the following link: `https://github.com/ismailsunni/altRnative`. This package is tested to do a benchmark on Spatial Data Science with R Book. To run a benchmark, an R script is needed as the input, and also the list of combination between platform and R implementation.
+
 
 ```{R sdsr_code_benchmark, eval=FALSE}
 code = expression(
@@ -172,8 +175,6 @@ sdsr_result = benchmarks_code(
   times = 3
   )
 ```
-
-## Benchmark {#benchmark}
 
 In this section, the result of the benchmark is shown and explained for baseline benchmark and geospatial workflow benchmark
 

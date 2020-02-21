@@ -67,7 +67,7 @@ For this kind of problem, there is not so much that user can do beside hoping th
 
 ### Running Time Error
 
-The last kind of error is Running Time Error. This error happens after package installation is finished succesfully. This error is hard to find since it can be anything. Based on the SDSR book, the research found three running time error. The first one is different behaviour of `sf` from GNU R with different GDAL and Proj version [@ProblemArchLinux]. There is a change of behaviour on GDAL/Proj that is passed to `sf`. Second running time error is on `sf` from FastR on Oracle Linux 7. In this error, `sf` can not read `gpkg` file[@SfInstalledNot]. The last is related to TERR which explained in \@ref(docker-image-terr).
+The last kind of error is Running Time Error. This error happens after package installation is finished succesfully. This error is hard to find since it can be anything. Based on the SDSR book, the research found three running time error. The first one is different behaviour of `sf` from GNU R with different GDAL and Proj version^[https://github.com/r-spatial/sf/issues/1238]. There is a change of behaviour on GDAL/Proj that is passed to `sf`. Second running time error is on `sf` from FastR on Oracle Linux 7. In this error, `sf` can not read `gpkg` file^[https://github.com/oracle/fastr/issues/128]. The last is related to TERR which explained in \@ref(docker-image-terr).
 
 Similar as problem with unsupported implementation, this kind of error is also hard to fix. It is either waiting for the bug to be fixed or fix the bug itself which is not easy task to do.
 
@@ -89,4 +89,4 @@ Docker image creation takes long time especially if there is limited information
 
 The altRnative package has shown its capability to perform benchmark accross multiple R implementation and platform. But there are some areas that can improved to get better result. Adding a feature to run benchmark from existing Docker container or custom Docker image will make it more flexibility to setup the benchmark process. This feature will also unlock the possibility to run benchmark not only for geospatial R workflow or non R script. In this case, altRnative will be a universal benchmarking tool.
 
-Another improvement is adding profiling feature to know which part of the code that spend the most of the time. There is already an R package for profiling [@ProfvisInteractiveVisualizations]. altRnative can use this R package to get the profiling tool, just like it uses microbenchmark to do the benchmarking.
+Another improvement is adding profiling feature to know which part of the code that spend the most of the time. There is already an R package for profiling [@profvis2019]. altRnative can use this R package to get the profiling tool, just like it uses microbenchmark to do the benchmarking.
