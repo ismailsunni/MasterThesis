@@ -1,9 +1,9 @@
 # Conclusion {#conclusion}
 
-This research explored the possibility of using alternative R implementations and platforms for geospatial R packages. It is shown the information provided by sysreqs database is almost complete only missing update as shown in table \@ref(tab:sysreqsdbUpdate). This research also show that all targeted R implementations can be installed in all platform, except the one that is not possible for geospatial R packages. The installation of geospatial R packages itself is not always straight forward. In this research, there are three common problems found in the installation process. It shows that not all alternative R implementation fully support geospatial R packages.
-
-Benchmarking tool called by altRnative is created to perform benchmark between successful Docker image. The result shows that there is not so much different in term of speed among the Docker image for geospatial workflow.
-
-In the future research in the same area, more Docker image can be created or fix the current failed Docker image. The benchmarking tool can also be extended to make it univeral benchmarking tool not only for R language and geospatial workflow. For a better understanding, profiling feature can be added to the benchmarking tool.
-
-In the bigger picture, this researh's most important contribution is the exploration of R implementation on different platform for geospatial R packages. This exploratin can be useful for R user to choose which R implementation or platform that they can use for their workflow. Another important contribution is the benchmarking tool that can be used for testing or perform benchmark for user's geospatial workflow.
+This research explored the possibility of using alternative R implementations and platforms for geospatial R packages. It is shown the information provided by the `sysreqs` database is almost complete only missing update as shown in table \@ref(tab:sysreqsdbUpdate). This research also shows that all targeted R implementations can be installed on all platforms, except the one that is not possible for geospatial R packages. The installation of geospatial R packages itself is not always straight forward. In this research, there are three common problems found in the installation process. It shows that not all alternative R implementation fully supports geospatial R packages.
+ 
+A benchmarking tool called by altRnative is created to perform a benchmark between a successful Docker image. The result shows that there is not so much difference in terms of speed among the Docker image for geospatial workflow.
+ 
+In future research in the same area, more Docker images can be created or fix the current failed Docker image. The benchmarking tool can also be extended to make it the universal benchmarking tool not only for R language and geospatial workflow. For a better understanding, the profiling feature can be added to the benchmarking tool.
+ 
+In the bigger picture, this research’s most important contribution is the exploration of R implementation on a different platform for geospatial R packages. This exploration can be useful for R users to choose which R implementation or platform that they can use for their workflow. Another important contribution is the benchmarking tool that can be used for testing or perform a benchmark for user's geospatial workflow.
