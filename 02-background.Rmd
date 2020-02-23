@@ -41,4 +41,4 @@ A container is computer software that is used to package and run an application 
 
 ## Benchmarking in R
 
-There are already several benchmarking R package for R like using `microbenchmark`, `rbenchmark`, `tictoc`, and `bench` [@gossmannWaysMeasureRunning2017]. Those packages measure the duration of running an R script or expression. Unfortunately, those packages do not support running the benchmark for different R implementation and platform easily.
+There are already several benchmarking R package for R like using `microbenchmark` [@mersmannMicrobenchmarkAccurateTiming2019], `rbenchmark` [@rbenchmark], `tictoc` [@tictoc], and `bench` [@gossmannWaysMeasureRunning2017]. Those packages measure the duration of running an R script or expression. Unfortunately, those packages do not support running the benchmark for different R implementation and platform easily.
