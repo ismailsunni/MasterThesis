@@ -10,6 +10,8 @@ In those two tables, there are four kinds of results. The first one is **Yes** w
  
 First, in order to gather all of the system dependencies required by geospatial R packages, R package `sysreqs` is used to access the `sysreqsdb` database. The result for each platform is obtained using this method. These results then used for creating geospatial R Docker images. The full result is available online^[https://github.com/ismailsunni/dockeRs/tree/master/scripts/sysreqs].
 
+All Docker images except the TERR one is published in Docker hub^[https://hub.docker.com/u/ismailsunni] while all Docker file is published in Github repository^[https://github.com/ismailsunni/dockeRs/]. In the Github repository, there are both successful and unsuccessful Docker file. It also provides some notes about the detail of the error and some command to build, run, log in to the Docker container shell, and completeness check of the geospatial R packages.
+
 ```{r loadLibraryResultAnalysis, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library('kableExtra')
 library('microbenchmark')
@@ -184,7 +186,7 @@ nano_time_factor = 10^9
 options(digits=3)
 ```
 
-`altRnative` package that is used for benchmarking is using Docker images for each R implementation and platform. In this case there is already elapsed time for running the container and destroy it. Baseline benchmark is used to check the time spent for this process. To do it, a very simple R script (`1 + 1`) is run 10 times for each Docker image. The summary can be seen at table \@ref(tab:summaryTableBaseline). It's clear that there is not so much different between Docker images for this baseline benchmark. The distribution of the baseline benchmark is shown in box plot figure \@ref(fig:baseline-benchmark). There are two outliers observation, but in general the result is quite similar within 0.1 second range for the mean.
+The baseline benchmark is used to check the time spent for running the Docker container and the R inside it. To do it, a very simple R script (`1 + 1`) is run 10 times for each Docker image. The summary can be seen at table \@ref(tab:summaryTableBaseline). It's clear that there is not so much difference between Docker images for this baseline benchmark. The distribution of the baseline benchmark is shown in box plot figure \@ref(fig:baseline-benchmark). There are two outlier observations, but in general, the result is quite similar within the 0.1-second range for the mean.
 
 ```{r create_summary_table_baseline, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 summaryTableBaseline <- baseline_benchmark %>% 
@@ -214,7 +216,7 @@ benchmark_boxplot(baseline_benchmark, main = 'Baseline Benchmark')
 
 ### Geospatial Workflow Benchmark {#geospatial-workflow-benchmark}
 
-For running geospatial workflow, the code from SDSR book is extracted using an R script to avoid overhead time in knitting the book process. The result of this benchmark can be seen in table \@ref(tab:summaryTableSDSR) and its distribution in box plot figure \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all Docker images. We can see also that GNU R has better compared (~27-28 seconds) to MRO (~33 seconds) regarldess the operating system. For better view of the speed comparison, a normalized time is created by using the mean of time for GNU R on Debian as the baseline. The result is shown in table \@ref(tab:normalizeSummaryTableSDSR). It's clear that MRO needs 1.25x time compared to GNU R.
+For running geospatial workflow, the code from the SDSR book is extracted using an R script to avoid overhead time in knitting the book process. The result of this benchmark can be seen in table \@ref(tab:summaryTableSDSR) and its distribution in box plot figure \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all Docker images. We can see also that GNU R has better compared (~27-28 seconds) to MRO (~33 seconds) regardless of the operating system. For a better view of the speed comparison, a normalized time is created by using the mean of time for GNU R on Debian as the baseline. The result is shown in table \@ref(tab:normalizeSummaryTableSDSR). It's clear that MRO needs 1.25x time compared to GNU R.
 
 ```{r create_summary_table_sdsr, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 summaryTableSDSR <- sdsr_code_benchmark %>% 
@@ -273,9 +275,10 @@ normalize_benchmark_boxplot(
     )
 ```
 
-It also can be check which chpater of the book that takes the most time to run in table \@ref(tab:longestChapter). Chapter `04-Raster-Cube.R` takes the most of the time compared to other chapters with 26.01 seconds. From here we can examine the benchmark result of chapter `04-Raster-Cube.R`.
-
-Based on table \@ref(tab:Chapter04SummaryTable) the difference between the Docker images are not big. It is more clear in the normalized benchmark table \@ref(tab:Chapter04NormalizedTable) that MRO needs around at most 1.2x time compared to the GNU R one. There is also no outlier in the benchmark `04-Raster-Cube.R` as shown in box plot figure \@ref(fig:Chapter04BoxPlot). Full result for benchmark per chapter can be found in apendix \@ref(apendix-benchmark-per-chapter).
+It also can be check which chapter of the book that takes the most time to run in table \@ref(tab:longestChapter). Chapter `04-Raster-Cube.R` takes the most of the time compared to other chapters with 26.01 seconds. From here we can examine the benchmark result of chapter `04-Raster-Cube.R`.
+ 
+Based on table \@ref(tab:Chapter04SummaryTable) the difference between the Docker images are not big. It is more clear in the normalized benchmark table \@ref(tab:Chapter04NormalizedTable) that MRO needs around at most 1.2x time compared to the GNU R one. There is also no outlier in the benchmark `04-Raster-Cube.R` as shown in box plot figure \@ref(fig:Chapter04BoxPlot). Full result for benchmark per chapter can be found in appendix \@ref(apendix-benchmark-per-chapter).
+ 
 
 ```{r find_longest_chapter, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library('plyr')
