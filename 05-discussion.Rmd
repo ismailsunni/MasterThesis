@@ -30,9 +30,9 @@ commonProblem <- data.frame(
     )
   )
 commonProblem %>% 
-  kable(col.names = c('System Dependencies', 'Unsupported Implementation', 'Running Time Problem'), caption = "Common Problems Example") %>%
-  row_spec(0,bold=TRUE) %>%
-  kable_styling(full_width = T, latex_options = "striped")
+  kable(col.names = c('System Dependencies', 'Unsupported Implementation', 'Running Time Problem'), caption = "Common Problems Example", format='latex') %>%
+  row_spec(0, bold=TRUE) %>%
+  kable_styling(full_width = T)
 ```
 
 ### System Dependencies
