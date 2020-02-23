@@ -1,10 +1,11 @@
 # Discussion {#discussion}
 
-This chapter contains the discussion about the result from the research. It is divided into three parts. First, the common problems that is found when creating Docker image for various R implementation and platform is compiled. The result of the benchmark is dicussed on the second part. The last part discuss about the limitation and the possible improvement of the research.
+This chapter contains a discussion about the result of the research. It is divided into three parts. First, the common problems that are found when creating a Docker image for various R implementation and platform are compiled. The result of the benchmark is discussed in the second part. The last part discusses the limitation and the possible improvement of the research.
+
 
 ## Common Problems for R Implementations and Platform
 
-Based on the result in Chapter 4, the problem found when creating Docker image for different R implementation on different platform can be grouped into three kind of problem. The first one is related to system dependencies, second is related to unsupported implementation, and the last one is about error or problem in running time. Example of each common problem can be seen in table \@ref(tab:commonProblemTable). Below for each common problem is discussed.
+Based on the result in chapter \@ref(result-analysis), the problem found when creating a Docker image for different R implementation on the different platforms can be grouped into three kinds of problems. The first one is related to system dependencies, second is related to unsupported implementation, and the last one is about error or problem in running time. An example of each common problem can be seen in table \@ref(tab:commonProblemTable). Below for each common problem is discussed.
 
 
 ```{r commonProblemTable, results="asis", echo=FALSE}
@@ -33,12 +34,12 @@ commonProblem %>%
   kable_styling(full_width = T, latex_options = "striped") %>%
   column_spec(2, width = "30em") %>%
   row_spec(0, bold = T) %>%
-  collapse_rows(columns = 1:1, valign = "middle")
+  collapse_rows(columns = 1:1, valign = "top")
 ```
 
 ### System Dependencies
 
-In this research, system dependencies are taken from sysreqsdb which provide list of system dependencies for each R package based on the metadata. This database is almost complete, there is only two outdated system dependencies for Fedora 32 as shown in table \@ref(tab:sysreqsdbUpdate). Some Docker image needs to install another system dependencies that are not available in the base image for example `gfortran`, `sqlite`, and `sqlite-devel`. But in this case it's more on that the system dependencies are not mentioned in the R packages. This kind of errors are relatively easy to solve for example by checking the new name of the package and try to install it again.
+In this research, system dependencies are taken from sysreqsdb which provide a list of system dependencies for each R package based on the metadata. This database is almost complete, there are only two outdated system dependencies for Fedora 32 as shown in table \@ref(tab:sysreqsdbUpdate). Some Docker image needs to install another system dependencies that are not available in the base image for example `gfortran`, `sqlite`, and `sqlite-devel`. But in this case, it's more on that the system dependencies are not mentioned in the R packages. This kind of error is relatively easy to solve for example by checking the new name of the package and try to install it again.
 
 ```{r sysreqsdbUpdate, results="asis", echo=FALSE}
 differenceSysReqsDB = data.frame(
@@ -52,41 +53,44 @@ differenceSysReqsDB %>% kable(col.names = c('Library', 'SysReqsDB', 'Fedora 32')
   row_spec(0, bold = T)
 ```
 
-Another kind of problem is related with the platform. Platforms do not provide the same support for system dependencies.
-For example, in Oracle Linux 7 does not have GDAL by default. It needs to add Extra Package for Enterprise Linux (EPEL) to get GDAL and other packages[@EPELFedoraProject]. It turns out, GDAL from EPEL is very old (version 1.11). In this case, GDAL must be built from source. It applies for other packages also which need the newer version and it is not always easy to build from source.
+Another kind of problem is related to the platform. Platforms do not provide the same support for system dependencies. For example, in Oracle Linux 7 does not have GDAL by default. It needs to add Extra Package for Enterprise Linux (EPEL) to get GDAL and other packages[@EPELFedoraProject]. It turns out, GDAL from EPEL is very old (version 1.11). In this case, GDAL must be built from the source. It applies for other packages also which need the newer version and it is not always easy to build from source.
+ 
+Reversely, some packages need older versions of system dependencies. For example, `sf` on MRO 3.5.3 needs GDAL version 2.x, not 3.x. Fedora 32 has GDAL version 3 while Fedora 30 has GDAL version 2. This happens because `sf` on MRO 3.5.3 snapshot is the old version (v 0.7.3) which depends on GDAL 2.x. To solve this kind of problem, it's either downgrade the packages or wait for the newer release.
+ 
+After the successful installation of system dependencies, it does not always work properly in the R environment. For example, `proj` is said that it has a configuration error on FastR on Debian/Ubuntu although it can be used properly. This issue has not been solved yet for Debian/Ubuntu.
 
-Reversely, some packages needs older version of system dependencies. For example, `sf` on MRO 3.5.3 needs GDAL version 2.x not 3.x. Fedora 32 has GDAL version 3 while Fedora 30 has GDAL version 2. This happens because `sf` on MRO 3.5.3 snapshot is the old version (v 0.7.3) which depends on GDAL 2.x. To solve this kind of problem, it's either downgrade the packages or wait for the newer release.
-
-After successful installation of system dependencies, it does not always work properly in the R environment. For example, `Proj` is said that it has configuration error on FastR on Debian/Ubuntu although it can be used properly. This issue has not been solved yet for Debian/Ubuntu.
 
 ### Unsupported Implementation
 
-The second common problem is unsupported implementation which refers to the implementation of R itself. This problem occurs because there is no support for a specific feature like in GNU R. For example, pqR is created based on GNU R version 2.15.1. In this case, it is not possible to install R packages which requires newer version of R, for example `sf` which needs R version 3.3.0 [@pebesmaSfSimpleFeatures2019]. Another example is Renjin which does not support external native libraries. Many R packages are incompatible with Renjin because of this for example `units` package that needs `udunits2` [@RenjinOrgUnits].
-
-For this kind of problem, there is not so much that user can do beside hoping that the R implementation will supoprt the features. Another solution is jumping to the R implementation development itself. Unfortunately, this kind of task is not trivial.
+The second common problem is the unsupported implementation which refers to the implementation of R itself. This problem occurs because there is no support for a specific feature like in GNU R. For example, pqR is created based on GNU R version 2.15.1. In this case, it is not possible to install R packages which require a newer version of R, for example, `sf` which needs R version 3.3.0 [@pebesmaSfSimpleFeatures2019]. Another example is Renjin which does not support external native libraries. Many R packages are incompatible with Renjin because of this for example `units` package that needs `udunits2` [@RenjinOrgUnits].
+ 
+For this kind of problem, there is not so much that the user can do besides hoping that the R implementation will support the features. Another solution is jumping to the R implementation development itself. Unfortunately, this kind of task is not trivial.
+ 
 
 ### Running Time Error
 
-The last kind of error is Running Time Error. This error happens after package installation is finished succesfully. This error is hard to find since it can be anything. Based on the SDSR book, the research found three running time error. The first one is different behaviour of `sf` from GNU R with different GDAL and Proj version^[https://github.com/r-spatial/sf/issues/1238]. There is a change of behaviour on GDAL/Proj that is passed to `sf`. Second running time error is on `sf` from FastR on Oracle Linux 7. In this error, `sf` can not read `gpkg` file^[https://github.com/oracle/fastr/issues/128]. The last is related to TERR which explained in \@ref(docker-image-terr).
-
-Similar as problem with unsupported implementation, this kind of error is also hard to fix. It is either waiting for the bug to be fixed or fix the bug itself which is not easy task to do.
+The last kind of error is Running Time Error. This error happens after package installation is finished successfully. This error is hard to find since it can be anything. Based on the SDSR book, the research found three running time error. The first one is the different behavior of `sf` from GNU R with different GDAL and Proj version^[https://github.com/r-spatial/sf/issues/1238]. There is a change of behavior on GDAL/Proj that is passed to `sf`. The second running time error is on `sf` from FastR on Oracle Linux 7. In this error, `sf` cannot read `gpkg` file^[https://github.com/oracle/fastr/issues/128]. The last is related to TERR which explained in \@ref(docker-image-terr).
+ 
+Similar to problem with the unsupported implementation, this kind of error is also hard to fix. It is either waiting for the bug to be fixed or fix the bug itself which is no easy task to do. 
 
 ## Benchmark Result
 
-The benchmark result from the experiment is quite clear as previously mentioned in chapter \@ref(benchmark). The platform difference almost does not give any difference and GNU R performs a little bit better (~1.1x faster) compared to MRO regardless the platform for geospatial workflow. This not a surprise since MRO's strength is about matrix or vector operation [@BenefitsMultithreadedPerformance] while geospatial workflow in the SDSR books doesn't need a lot of matrix or vector operation.
+The benchmark result from the experiment is quite clear as previously mentioned in chapter \@ref(benchmark). The platform difference almost does not give any difference and GNU R performs a little bit better (~1.1x faster) compared to MRO regardless of the platform for geospatial workflow. This not a surprise since MRO's strength is about matrix or vector operation [@BenefitsMultithreadedPerformance] while geospatial workflow in the SDSR books doesn't need a lot of matrix or vector operation.
+ 
 
 ## Limitation and Recommendations
 
 ### Docker Images Creation
 
-Docker image creation takes long time especially if there is limited information or stumbled on a problem. There are some possible fixes that can be done to create more geospatial Docker images.
-
-1. Downgrade packages in Arch Linux so that it can use GDAL 2.x to support installation of MRO 3.5.3. Due to time limitatio and last minute knowledge about unofficial MRO package on AUR[@AURMicrosoftropen], this solution has not been checked.
-2. Create Docker image based on Fedora 30 or 32 to install FastR 3.6.1 for an updated packages support. This research has only done FastR on Oracle Linux 7.
-3. Create Docker image for Windows to explore the compatibility of geospatial packages and get more performance comparison.  
+Docker image creation takes a long time especially if there is limited information or stumbled on a problem. There are some possible fixes that can be done to create more geospatial Docker images.
+ 
+1. Downgrade packages in Arch Linux so that it can use GDAL 2.x to support the installation of MRO 3.5.3. Due to time limitation and last-minute knowledge about the unofficial MRO package on AUR[@AURMicrosoftropen], this solution has not been checked.
+2. Create a Docker image based on Fedora 30 or 32 to install FastR 3.6.1 for updated packages support. This research has only done FastR on Oracle Linux 7.
+3. Create a Docker image for Windows to explore the compatibility of geospatial packages and get more performance comparison. 
 
 ### Benchmarking Tool
 
-The altRnative package has shown its capability to perform benchmark accross multiple R implementation and platform. But there are some areas that can improved to get better result. Adding a feature to run benchmark from existing Docker container or custom Docker image will make it more flexibility to setup the benchmark process. This feature will also unlock the possibility to run benchmark not only for geospatial R workflow or non R script. In this case, altRnative will be a universal benchmarking tool.
+The altRnative package has shown its capability to perform benchmark across multiple R implementation and platform. But there are some areas that can be improved to get better results. Adding a feature to run a benchmark from the existing Docker container or custom Docker image will make it more flexibility to set up the benchmark process. This feature will also unlock the possibility to run a benchmark not only for geospatial R workflow or non-R script. In this case, altRnative will be a universal benchmarking tool.
 
-Another improvement is adding profiling feature to know which part of the code that spend the most of the time. There is already an R package for profiling [@profvis2019]. altRnative can use this R package to get the profiling tool, just like it uses microbenchmark to do the benchmarking.
+Another improvement is adding profiling feature to know which part of the code that spends the most of the time. There is already an R package for profiling, called `profvis` [@profvis2019]. altRnative can use this R package to get the profiling tool, just like it uses `microbenchmark` to do the benchmarking.
+
