@@ -153,30 +153,28 @@ Since it is not possible to install geospatial packages on TERR on Debian, the s
 
 ## Benchmark {#benchmark}
 
+This section is divided into three parts. The first one is a brief explanation of the benchmarking tool that is created and used in this research. The second part is the result and analysis of the baseline benchmark. And the last one is the result and analysis for the geospatial workflow benchmark.
+
 ### Benchmark Tool (`altRnative`)
 
-A new R package name `altRnative` is created to provide functionalities to do benchmark for R script across different Docker image [@altRnative2020]. `altRnative` uses `microbenchmark` for running the benchmark process and `stevedore` for managing the Docker image and containers. This package is available in the GitHub repository, in the following link: `https://github.com/ismailsunni/altRnative`. This package is tested to do a benchmark on Spatial Data Science with R Book. To run a benchmark, an R script is needed as the input, and also the list of combination between platform and R implementation.
+A new R package name `altRnative` is created to provide functionalities to do benchmark for R script across different Docker image [@altRnative2020]. `altRnative` uses `microbenchmark` [@mersmannMicrobenchmarkAccurateTiming2019] for running the benchmark process and `stevedore` [@fitzjohnStevedoreDockerClient2019] for managing the Docker image and containers. This package is available in the GitHub repository, in the following link: `https://github.com/ismailsunni/altRnative`.
+ 
+In the current version, `altRnative` only supports the successful Docker image created in this research as shown in table \@ref(tab:geospatialRDockerImagesTable). Users can choose which platform and R implementation that will be used in the benchmarking. The R script target for the benchmark can be provided to the `code` parameter. It can accept a raw string that represents R code or an `expression`. For running R code from a file, it can use the `source` method. An example of a running benchmark can be seen below.
 
-
-```{R sdsr_code_benchmark, eval=FALSE}
-code = expression(
-  setwd('/home/docker/sdsr'), 
-  bookdown::clean_book(TRUE), 
-  unlink('_book/', recursive=TRUE), 
-  unlink('_bookdown_files', recursive=TRUE), 
-  bookdown::render_book('index.Rmd', 'bookdown::gitbook')
-  )
-
-sdsr_result = benchmarks_code(
-  code = code, 
-  platforms = c('debian', 'ubuntu', 'fedora', 'archlinux'),
+```{R baselineBenchmarkCode, eval=FALSE}
+baseline_benchmark_result = benchmarks_code(
+  code = "1 + 1", 
   r_implementations = c('gnu-r', 'mro'), 
-  volumes = '/home/ismailsunni/dev/r/sdsr:/home/docker/sdsr', 
-  times = 3
+  platforms = c('debian', 'ubuntu', 'fedora', 'archlinux'),
+  times = 10
   )
 ```
 
-In this section, the result of the benchmark is shown and explained for baseline benchmark and geospatial workflow benchmark
+After the benchmark result is obtained, it can plot using `microbenchmark`'s default plot or box plot. Other than that, `altRnative` provides its own box plot function for most common usage. The sample plot can be seen in section \@ref(baseline-benchmark) and \@ref(geospatial-workflow-benchmark).
+ 
+Another useful feature of `altRnative` in calculating the elapsed time ratio between the benchmark result using `normalize_benchmark_result` function. This function gives the ratio for each benchmark result compared to the mean of selected Docker image (implementation and platform.). From this result, it is easier to see the comparison between Docker images. From this result, it also can be plotted using the default box plot method, or directly using `normalize_benchmark_boxplot` from `altRnative` that calculating the ratio internally.
+
+### Baseline Benchmark {#baseline-benchmark}
 
 ```{r load_data, included=FALSE, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 baseline_benchmark = readRDS(file = "./data/simple_benchmark_result.rds")  # 1 + 1
@@ -185,8 +183,6 @@ sdsr_code_benchmark = readRDS(file = "./data/sdsr_code_benchmark_result.rds") # 
 nano_time_factor = 10^9
 options(digits=3)
 ```
-
-### Baseline Benchmark
 
 `altRnative` package that is used for benchmarking is using Docker images for each R implementation and platform. In this case there is already elapsed time for running the container and destroy it. Baseline benchmark is used to check the time spent for this process. To do it, a very simple R script (`1 + 1`) is run 10 times for each Docker image. The summary can be seen at table \@ref(tab:summaryTableBaseline). It's clear that there is not so much different between Docker images for this baseline benchmark. The distribution of the baseline benchmark is shown in box plot figure \@ref(fig:baseline-benchmark). There are two outliers observation, but in general the result is quite similar within 0.1 second range for the mean.
 
@@ -216,7 +212,7 @@ summaryTableBaseline %>%
 benchmark_boxplot(baseline_benchmark, main = 'Baseline Benchmark')
 ```
 
-### Geospatial Workflow Benchmark
+### Geospatial Workflow Benchmark {#geospatial-workflow-benchmark}
 
 For running geospatial workflow, the code from SDSR book is extracted using an R script to avoid overhead time in knitting the book process. The result of this benchmark can be seen in table \@ref(tab:summaryTableSDSR) and its distribution in box plot figure \@ref(fig:sdsr-benchmark). In this result, there is no outlier for all Docker images. We can see also that GNU R has better compared (~27-28 seconds) to MRO (~33 seconds) regarldess the operating system. For better view of the speed comparison, a normalized time is created by using the mean of time for GNU R on Debian as the baseline. The result is shown in table \@ref(tab:normalizeSummaryTableSDSR). It's clear that MRO needs 1.25x time compared to GNU R.
 
