@@ -10,31 +10,29 @@ Based on the result in chapter \@ref(result-analysis), the problem found when cr
 
 ```{r commonProblemTable, results="asis", echo=FALSE}
 commonProblem <- data.frame(
-  problem = c(
-    rep("System Dependencies", 4), 
-    rep("Unsupported Implementation", 3),
-    rep("Running Time Problem", 2)
-    ),
-  example = c(
-    'Outdated or missing dependencies from sysreqsdb for example v8, sqlite, gfortran.',
-    'System dependencies not available on the platform. For example GDAL is too old on Oracle Linux.',
+  sysdep = c(
+    'Outdated or missing dependencies from sysreqsdb, for example, v8, sqlite, gfortran.',
+    'System dependencies not available on the platform. For example, GDAL is too old on Oracle Linux.',
     'System dependencies are installed but not usable. For example Udunits on Renjin',
-    'System dependencies are too new for the R packages. For example `sf` in MRO 3.5.3',
-    
+    'System dependencies are too new for the R packages. For example `sf` in MRO 3.5.3'
+    ),
+  unsupported = c(
     'pqR is based on GNU R version 2.15.1 thus it does not support `sf`',
-    'Renjin needs to download everytime it tries to load a package',
+    'Renjin needs to download every time it tries to load a package',
     'TERR does not have javareconf command/file',
-    
+    ''
+    ),
+  rto = c(
     'Error reinstalling R package on TERR',
-    'Error loading gpkg with `sf` for FastR'
+    'Error loading gpkg with `sf` for FastR',
+    '',
+    ''
     )
   )
 commonProblem %>% 
-  kable(col.names = c('Problem', 'Example'), caption = "Common Problems") %>%
-  kable_styling(full_width = T, latex_options = "striped") %>%
-  column_spec(2, width = "30em") %>%
-  row_spec(0, bold = T) %>%
-  collapse_rows(columns = 1:1, valign = "top")
+  kable(col.names = c('System Dependencies', 'Unsupported Implementation', 'Running Time Problem'), caption = "Common Problems Example") %>%
+  row_spec(0,bold=TRUE) %>%
+  kable_styling(full_width = T, latex_options = "striped")
 ```
 
 ### System Dependencies
