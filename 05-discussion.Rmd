@@ -78,13 +78,15 @@ The benchmark result from the experiment is quite clear as previously mentioned 
 
 ## Limitation and Recommendations
 
+In this section, the limitation of this research is discussed with the recommendations for improvement that can be done in the future. It also contains some more ideas for future work that can be implemented. There is the part of this section, each one for the Docker Images creation, the benchmarking tool, and the benchmarking process.
+
 ### Docker Images Creation
 
 Docker image creation takes a long time especially if there is limited information or stumbled on a problem. There are some possible fixes that can be done to create more geospatial Docker images.
  
 1. Downgrade packages in Arch Linux so that it can use GDAL 2.x to support the installation of MRO 3.5.3. Due to time limitation and last-minute knowledge about the unofficial MRO package on AUR[@AURMicrosoftropen], this solution has not been checked.
 2. Create a Docker image based on Fedora 30 or 32 to install FastR 3.6.1 for updated packages support. This research has only done FastR on Oracle Linux 7.
-3. Create a Docker image for Windows to explore the compatibility of geospatial packages and get more performance comparison. 
+3. Create a Docker image for Windows to explore the compatibility of geospatial packages and get more performance comparison.
 
 ### Benchmarking Tool
 
@@ -92,3 +94,10 @@ The altRnative package has shown its capability to perform benchmark across mult
 
 Another improvement is adding profiling feature to know which part of the code that spends the most of the time. There is already an R package for profiling, called `profvis` [@profvis2019]. altRnative can use this R package to get the profiling tool, just like it uses `microbenchmark` to do the benchmarking.
 
+Lastly, this tool can be deployed in a server (cloud) and can be made as a service. This service will help the user to run their R script on different R implementation and platforms without setting up their own infrastructure on their machine. As for the developer, this tool can be used on continuous integration (e.g. Travis) to test their R package continuously. 
+
+### Benchmarking
+
+In this research, the benchmark is only run for one use case (SDSR book) and only on one machine. This means that the result may be specific to the use case and the machine. Therefore, it is a good idea to run more use cases and on more machines to see whether the result convergence or not.
+
+This research uses the latest version of R implementation. It uses GNU R version 3.6.1 and MRO 3.5.3 which based on GNU  R 3.5.3. In this case, there may be already a gap between those two GNU R versions. This version difference also applies to the installed system dependencies' version. For example, GDAL version 2.x on MRO Docker image and GDAL version 3.x or GNU R on Arch Linux Docker image. Therefore, these different versions of R implementation and system dependencies can affect the benchmark result.
